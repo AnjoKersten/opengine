@@ -1,6 +1,6 @@
 # CMake entry point
 cmake_minimum_required (VERSION 2.6)
-project (MyFramework)
+project (OPEngine)
 
 find_package(OpenGL REQUIRED)
 
@@ -61,11 +61,12 @@ add_definitions(
 add_library(src
 	src/Vector3.h
 	src/Vector3.cpp
+    src/shader.h
 )
 
 # Demo
 add_executable(demo
-	engine/demo.cpp
+	engine/application.cpp
 )
 target_link_libraries(demo
 	src
