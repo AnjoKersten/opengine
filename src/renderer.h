@@ -13,17 +13,23 @@ public:
     GLFWwindow* window;
     
     void processInput(GLFWwindow* window);
+    void loadShader();
+    void makeTriangle();
+    void cleanUp();
     
-    void CreateTriangle();
-    void DrawTriangle();
+    unsigned int vertexShader;
+    unsigned int fragmentShader;
     
 private:
     int _WIDTH = 800;
     int _HEIGHT = 600;
     
-    void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+    const char *vertexShaderSource;
+    const char *fragmentShaderSource;
     
-    unsigned int VBO, VAO;
+    unsigned int shaderProgram;
+    
+    unsigned int VBO, VAO, EBO;
 };
 
 #endif

@@ -61,7 +61,8 @@ add_definitions(
 add_library(src
 	src/Vector3.h
 	src/Vector3.cpp
-    src/shader.h
+    	src/renderer.h
+    	src/renderer.cpp
 )
 
 # Demo
