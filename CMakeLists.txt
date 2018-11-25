@@ -39,14 +39,14 @@ endif(WIN32)
 include_directories(
 	external/glfw-3.0.3/include/GLFW/
 	external/glm-0.9.8.4/
-	external/glad/include/glad
+	external/glad/include/glad/
 	.
 )
 
 set(ALL_GRAPHICS_LIBS
 	${OPENGL_LIBRARY}
 	GLFW_303
-	GLEW_190
+	GLAD
 )
 
 add_definitions(
@@ -59,17 +59,20 @@ add_definitions(
 
 # src (libcommon.a)
 add_library(src
-	src/Vector3.h
-	src/Vector3.cpp
     	src/renderer.h
     	src/renderer.cpp
+			src/shader.h
+			src/texture.h
+			src/texture.cpp
+			src/stb_image.h
+			src/stb_image.cpp
 )
 
 # Demo
-add_executable(demo
+add_executable(engine
 	engine/application.cpp
 )
-target_link_libraries(demo
+target_link_libraries(engine
 	src
 	${ALL_GRAPHICS_LIBS}
 )

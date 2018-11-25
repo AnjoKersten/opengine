@@ -17,7 +17,7 @@ add_subdirectory (glfw-3.0.3)
 
 include_directories(
     glfw-3.0.3/include/GLFW/
-    glad/include/glad
+    glad/include/glad/
 )
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
@@ -35,22 +35,23 @@ set(OPENGL_LIBRARY
 )
 endif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 
-### GLAD ###
+### glad ###
 
 set(GLAD_SOURCE
     glad/src/glad.c
 )
 
 set(GLAD_HEADERS
+	
 )
 
 
-add_library( GLEW_190 STATIC
+add_library( GLAD STATIC
     ${GLAD_SOURCE}
     ${GLAD_INCLUDE}
 )
 
-target_link_libraries(GLEW_190
+target_link_libraries(GLAD
     ${OPENGL_LIBRARY}
     ${EXTRA_LIBS}
 )
