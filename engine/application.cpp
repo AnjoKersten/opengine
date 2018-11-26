@@ -6,6 +6,8 @@
 #include "src/stb_image.h"
 #include "src/renderer.h"
 #include "src/shader.h"
+#include "src/Vec.h"
+#include <iostream>
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 

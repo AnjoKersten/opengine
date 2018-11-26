@@ -66,6 +66,7 @@ add_library(src
 			src/texture.cpp
 			src/stb_image.h
 			src/stb_image.cpp
+			src/config.h
 )
 
 # Demo

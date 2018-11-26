@@ -14,8 +14,6 @@ Texture::Texture(const char *texFile) {
   if (data) {
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
     glGenerateMipmap(GL_TEXTURE_2D);
-    std::cout << "Succesfull loaded texture" << std::endl;
-    std::cout << texID << std::endl;
   } else {
     std::cout << "Failed to load texture" << std::endl;
   }

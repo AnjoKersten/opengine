@@ -1,5 +1,6 @@
 #include "renderer.h"
 #include <iostream>
+#include "config.h"
 
 Renderer::Renderer() {
     glfwInit();
@@ -11,7 +12,9 @@ Renderer::Renderer() {
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // uncomment this statement to fix compilation on OS X
     #endif
 
-    window = glfwCreateWindow(_WIDTH, _HEIGHT, "OPENGINE", NULL, NULL);
+    config con;
+
+    window = glfwCreateWindow(con.xRes, con.yRes, "OPENGINE", NULL, NULL);
     if (window == NULL) {
         std::cout << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
