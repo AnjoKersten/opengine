@@ -59,14 +59,15 @@ add_definitions(
 
 # src (libcommon.a)
 add_library(src
-    	src/renderer.h
-    	src/renderer.cpp
-			src/shader.h
-			src/texture.h
-			src/texture.cpp
-			src/stb_image.h
-			src/stb_image.cpp
+    	src/Renderer/renderer.h
+    	src/Renderer/renderer.cpp
+			src/Renderer/shader.h
+			src/Texture/texture.h
+			src/Texture/texture.cpp
+			src/Texture/stb_image.h
+			src/Texture/stb_image.cpp
 			src/config.h
+			src/Maths/glm.h
 )
 
 # Demo

@@ -3,10 +3,9 @@
 #include <OpenGL/gl.h>
 #include <OpenGl/glu.h>
 #include <GLUT/glut.h>
-#include "src/stb_image.h"
-#include "src/renderer.h"
-#include "src/shader.h"
-#include "src/Vec.h"
+#include "src/Texture/stb_image.h"
+#include "src/Renderer/renderer.h"
+#include "src/Renderer/shader.h"
 #include <iostream>
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);

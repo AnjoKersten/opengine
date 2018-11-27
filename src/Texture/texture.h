@@ -5,7 +5,7 @@
 #include <glfw3.h>
 
 #include "stb_image.h"
-#include "shader.h"
+#include "../Renderer/shader.h"
 
 class Texture {
 public:

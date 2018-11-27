@@ -1,6 +1,6 @@
 #include "renderer.h"
 #include <iostream>
-#include "config.h"
+#include "../config.h"
 
 Renderer::Renderer() {
     glfwInit();
@@ -36,6 +36,25 @@ void Renderer::processInput(GLFWwindow *window) {
         glfwSetWindowShouldClose(window, true);
     }
 }
+
+// void Renderer::finishRender(sf::RenderWindow& window, const Camera& camera) {
+//     glClearColor(0.1, 0.5, 1.0, 1.0);
+//     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+//     m_quadRenderer.renderQuads(camera);
+//     window.display();
+// }
+
+// void QuadRenderer::renderQuads(const Camera& camera) {
+//     m_shader.useProgram();
+//     m_quadModel.bindVAO();
+//     m_basicTexture.bindTexture();
+//     m_shader.loadProjectionViewMatrix(camera.getProjectionViewMatrix());
+//     for (auto& quad : m_quads) {
+//          m_shader.loadModelMatrix(makeModelMatrix(quad, {0, 0, 0}));
+//          glDrawElements(GL_TRIANGLES, m_quadModel.getIndicesCount(), GL_UNSIGNED_INT, nullptr);
+//     }
+//     m_quads.clear();
+// }
 
 void Renderer::createRectangle() {
 	float vertices[] = {
