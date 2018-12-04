@@ -4,6 +4,10 @@
 #include <glad.h>
 #include <glfw3.h>
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 #include "src/Renderer/shader.h"
 #include "src/Texture/texture.h"
 
@@ -15,10 +19,8 @@ public:
     virtual ~Renderer();
     GLFWwindow* window;
     void processInput(GLFWwindow* window);
-    void finishRender(GLFWwindow& window, const Camera& camera);
-    void renderQuads(const Camera& camera);
-    void createRectangle();
-    void drawRectangle();
+    void createCube();
+    void drawCube();
     void cleanUp();
 private:
     const char *vertexShaderSource;
