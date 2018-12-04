@@ -1,12 +1,18 @@
+/*
+Include libraries here
+*/
 #include <glad.h>
 #include <glfw3.h>
-#include "src/Texture/stb_image.h"
-#include "src/Renderer/renderer.h"
-#include "src/Renderer/shader.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include "../src/config.h"
+
+/*
+Include classes here
+*/
+#include "src/Renderer/renderer.h"
+#include "src/Renderer/shader.h"
+#include "../src/Renderer/camera.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
@@ -14,7 +20,8 @@ using namespace glm;
 
 int main() {
     Renderer renderer;
-    config con;
+    Camera camera;
+    //Position of object
     glm::vec3 cubePositions[] = {
       glm::vec3( 0.0f,  0.0f,  0.0f),
       glm::vec3( 2.0f,  5.0f, -15.0f),
@@ -29,7 +36,6 @@ int main() {
   	};
 
     Shader demoShader("../src/shaders/vertex.vs", "../src/shaders/fragment.fs");
-
     Texture tex("assets/wall.jpg");
     Texture secTex("assets/fire.jpg");
 
@@ -39,10 +45,12 @@ int main() {
 
     glfwSetFramebufferSizeCallback(renderer.window, framebuffer_size_callback);
 
+    demoShader.setMat4("projection", camera.projection);
+
     // render loop
     while (!glfwWindowShouldClose(renderer.window)) {
         renderer.processInput(renderer.window);
-		    demoShader.use();
+        camera.processInput(renderer.window);
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // also clear the depth buffer now!
 
@@ -51,14 +59,9 @@ int main() {
     		glActiveTexture(GL_TEXTURE1);
     		glBindTexture(GL_TEXTURE_2D, secTex.texID);
 
-        // create transformations
-        glm::mat4 view;
-        glm::mat4 projection;
-        projection = glm::perspective(glm::radians(45.0f), (float)con.xRes / (float)con.yRes, 0.1f, 100.0f);
-        view       = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
-        // pass transformation matrices to the shader
-        demoShader.setMat4("projection", projection); // note: currently we set the projection matrix each frame, but since the projection matrix rarely changes it's often best practice to set it outside the main loop only once.
-        demoShader.setMat4("view", view);
+        demoShader.use();
+        camera.update();
+        demoShader.setMat4("view", camera.view);
 
         renderer.drawCube();
     		for (unsigned int i = 0; i < 10; i++) {

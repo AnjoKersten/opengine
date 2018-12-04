@@ -68,6 +68,8 @@ add_library(src
 			src/Texture/stb_image.cpp
 			src/config.h
 			src/Maths/glm.h
+			src/Renderer/camera.h
+			src/Renderer/camera.cpp
 )
 
 # Demo

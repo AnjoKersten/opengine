@@ -23,9 +23,6 @@ public:
     void drawCube();
     void cleanUp();
 private:
-    const char *vertexShaderSource;
-    const char *fragmentShaderSource;
-    unsigned int shaderProgram;
     unsigned int VBO, VAO, EBO;
 };
 

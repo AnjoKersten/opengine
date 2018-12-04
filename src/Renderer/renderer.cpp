@@ -15,23 +15,18 @@ Renderer::Renderer() {
     #endif
 
     config con;
-
     window = glfwCreateWindow(con.xRes, con.yRes, "OPENGINE", NULL, NULL);
     if (window == NULL) {
         std::cout << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
     }
     glfwMakeContextCurrent(window);
-
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
         std::cout << "Failed to initialize GLAD" << std::endl;
     }
-
     glEnable(GL_DEPTH_TEST);
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-
     createCube();
-
 }
 
 Renderer::~Renderer() {
