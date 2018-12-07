@@ -21,6 +21,7 @@ set(CMAKE_TARGET_DEFINITIONS_C
 set(CMAKE_C_TARGET_INCLUDE_PATH
   "glfw-3.0.3/include/GLFW"
   "glad/include/glad"
+  "assimp/include"
   )
 
 # Targets to which this target links.

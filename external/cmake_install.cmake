@@ -35,6 +35,7 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/Users/mathijs/HDMS DRIVE/opengine/external/glfw-3.0.3/cmake_install.cmake")
+  include("/Users/mathijs/HDMS DRIVE/opengine/external/assimp-3.3.1/cmake_install.cmake")
 
 endif()
 

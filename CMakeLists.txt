@@ -40,6 +40,7 @@ include_directories(
 	external/glfw-3.0.3/include/GLFW/
 	external/glm-0.9.8.4/
 	external/glad/include/glad/
+	external/assimp/include/
 	.
 )
 
@@ -62,23 +63,24 @@ add_library(src
     	src/Renderer/renderer.h
     	src/Renderer/renderer.cpp
 			src/Renderer/shader.h
-			src/Texture/texture.h
-			src/Texture/texture.cpp
-			src/Texture/stb_image.h
-			src/Texture/stb_image.cpp
 			src/config.h
 			src/Maths/glm.h
 			src/Renderer/camera.h
 			src/Renderer/camera.cpp
+			src/Model/model.h
+			src/Model/mesh.h
+			src/Texture/stb_image.cpp
+			src/Texture/stb_image.h
 )
 
 # Demo
 add_executable(engine
-	engine/application.cpp
+	engine/main.cpp
 )
 target_link_libraries(engine
 	src
 	${ALL_GRAPHICS_LIBS}
+	assimp
 )
 # Copy assets and shaders to the build directory
 # (In Visual Studio, copy these directories to either 'Release' or 'Build')

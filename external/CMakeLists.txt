@@ -7,7 +7,7 @@ add_definitions(
     -DTW_STATIC
     -DTW_NO_LIB_PRAGMA
     -DTW_NO_DIRECT3D
-    -DGLEW_STATIC
+    -DGLAD_STATIC
     -D_CRT_SECURE_NO_WARNINGS
 )
 
@@ -18,6 +18,7 @@ add_subdirectory (glfw-3.0.3)
 include_directories(
     glfw-3.0.3/include/GLFW/
     glad/include/glad/
+    assimp/include/
 )
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
@@ -42,7 +43,7 @@ set(GLAD_SOURCE
 )
 
 set(GLAD_HEADERS
-	
+
 )
 
 
@@ -55,3 +56,13 @@ target_link_libraries(GLAD
     ${OPENGL_LIBRARY}
     ${EXTRA_LIBS}
 )
+
+### ASSIMP ###
+
+set(ZLIB_LIBRARIES zlibstatic)
+set(ENABLE_BOOST_WORKAROUND ON)
+set(BUILD_STATIC_LIB ON)
+set(BUILD_ASSIMP_TOOLS  ON)
+set(ASSIMP_BUILD_STATIC_LIB ON)
+
+add_subdirectory (assimp-3.3.1)

@@ -6,5 +6,5 @@ C_FLAGS =  -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX
 
 C_DEFINES = -DGLEW_STATIC -DTW_NO_DIRECT3D -DTW_NO_LIB_PRAGMA -DTW_STATIC -D_CRT_SECURE_NO_WARNINGS
 
-C_INCLUDES = -I"/Users/mathijs/HDMS DRIVE/opengine/external/glfw-3.0.3/include/GLFW" -I"/Users/mathijs/HDMS DRIVE/opengine/external/glad/include/glad" 
+C_INCLUDES = -I"/Users/mathijs/HDMS DRIVE/opengine/external/glfw-3.0.3/include/GLFW" -I"/Users/mathijs/HDMS DRIVE/opengine/external/glad/include/glad" -I"/Users/mathijs/HDMS DRIVE/opengine/external/assimp/include" 
 

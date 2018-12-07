@@ -3,15 +3,15 @@
 
 #include <glad.h>
 #include <glfw3.h>
+#include <iostream>
+#include <fstream>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include "src/Renderer/shader.h"
-#include "src/Texture/texture.h"
-
-class Camera;
+#include "../config.h"
+#include "shader.h"
 
 class Renderer {
 public:

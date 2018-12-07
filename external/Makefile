@@ -56,6 +56,18 @@ CMAKE_BINARY_DIR = "/Users/mathijs/HDMS DRIVE/opengine/external"
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/local/Cellar/cmake/3.12.4/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/local/Cellar/cmake/3.12.4/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -77,6 +89,40 @@ edit_cache:
 edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
+
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/local/Cellar/cmake/3.12.4/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/local/Cellar/cmake/3.12.4/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/local/Cellar/cmake/3.12.4/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/local/Cellar/cmake/3.12.4/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\" \"assimp-bin\" \"assimp-dev\" \"libassimp3.3.1-dev\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -136,6 +182,71 @@ GLFW_303/fast:
 	$(MAKE) -f glfw-3.0.3/src/CMakeFiles/GLFW_303.dir/build.make glfw-3.0.3/src/CMakeFiles/GLFW_303.dir/build
 .PHONY : GLFW_303/fast
 
+#=============================================================================
+# Target rules for targets named uninstall
+
+# Build rule for target.
+uninstall: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 uninstall
+.PHONY : uninstall
+
+# fast build rule for target.
+uninstall/fast:
+	$(MAKE) -f assimp-3.3.1/CMakeFiles/uninstall.dir/build.make assimp-3.3.1/CMakeFiles/uninstall.dir/build
+.PHONY : uninstall/fast
+
+#=============================================================================
+# Target rules for targets named assimp
+
+# Build rule for target.
+assimp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 assimp
+.PHONY : assimp
+
+# fast build rule for target.
+assimp/fast:
+	$(MAKE) -f assimp-3.3.1/code/CMakeFiles/assimp.dir/build.make assimp-3.3.1/code/CMakeFiles/assimp.dir/build
+.PHONY : assimp/fast
+
+#=============================================================================
+# Target rules for targets named assimp_cmd
+
+# Build rule for target.
+assimp_cmd: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 assimp_cmd
+.PHONY : assimp_cmd
+
+# fast build rule for target.
+assimp_cmd/fast:
+	$(MAKE) -f assimp-3.3.1/tools/assimp_cmd/CMakeFiles/assimp_cmd.dir/build.make assimp-3.3.1/tools/assimp_cmd/CMakeFiles/assimp_cmd.dir/build
+.PHONY : assimp_cmd/fast
+
+#=============================================================================
+# Target rules for targets named unit
+
+# Build rule for target.
+unit: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 unit
+.PHONY : unit
+
+# fast build rule for target.
+unit/fast:
+	$(MAKE) -f assimp-3.3.1/test/CMakeFiles/unit.dir/build.make assimp-3.3.1/test/CMakeFiles/unit.dir/build
+.PHONY : unit/fast
+
+#=============================================================================
+# Target rules for targets named gtest
+
+# Build rule for target.
+gtest: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 gtest
+.PHONY : gtest
+
+# fast build rule for target.
+gtest/fast:
+	$(MAKE) -f assimp-3.3.1/test/CMakeFiles/gtest.dir/build.make assimp-3.3.1/test/CMakeFiles/gtest.dir/build
+.PHONY : gtest/fast
+
 # target to build an object file
 glad/src/glad.o:
 	$(MAKE) -f CMakeFiles/GLAD.dir/build.make CMakeFiles/GLAD.dir/glad/src/glad.o
@@ -157,10 +268,19 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... install/local"
+	@echo "... GLAD"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... GLAD"
+	@echo "... install/strip"
+	@echo "... install"
+	@echo "... list_install_components"
 	@echo "... GLFW_303"
+	@echo "... uninstall"
+	@echo "... assimp"
+	@echo "... assimp_cmd"
+	@echo "... unit"
+	@echo "... gtest"
 	@echo "... glad/src/glad.o"
 	@echo "... glad/src/glad.i"
 	@echo "... glad/src/glad.s"
