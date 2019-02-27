@@ -17,6 +17,9 @@
 //Android JNI IOSystem support is active
 ASSIMP_ANDROID_JNIIOSYSTEM:BOOL=OFF
 
+//Enable AddressSanitizer.
+ASSIMP_ASAN:BOOL=OFF
+
 //Path the tool executables are installed to.
 ASSIMP_BIN_INSTALL_DIR:PATH=bin
 
@@ -31,6 +34,9 @@ ASSIMP_BUILD_3MF_IMPORTER:BOOL=ON
 
 //build the AC importer
 ASSIMP_BUILD_AC_IMPORTER:BOOL=ON
+
+//default value of all ASSIMP_BUILD_XXX_IMPORTER value
+ASSIMP_BUILD_ALL_IMPORTERS_BY_DEFAULT:BOOL=ON
 
 //describe the current architecture.
 ASSIMP_BUILD_ARCHITECTURE:STRING=
@@ -175,6 +181,12 @@ ASSIMP_BUILD_X_IMPORTER:BOOL=ON
 //Build your own zlib
 ASSIMP_BUILD_ZLIB:BOOL=OFF
 
+//Enable this to measure test coverage.
+ASSIMP_COVERALLS:BOOL=OFF
+
+//Set to ON to enable double precision processing
+ASSIMP_DOUBLE_PRECISION:BOOL=OFF
+
 //adds the target headercheck which compiles every header file,
 // default disabled because it adds many targets
 ASSIMP_HEADERCHECK:BOOL=OFF
@@ -198,6 +210,12 @@ ASSIMP_OPT_BUILD_PACKAGES:BOOL=OFF
 //the package-specific version used for uploading the sources
 ASSIMP_PACKAGE_VERSION:STRING=0
 
+//Enable Undefined Behavior sanitizer.
+ASSIMP_UBSAN:BOOL=OFF
+
+//Treat warnings as errors.
+ASSIMP_WERROR:BOOL=OFF
+
 //Was gtest setup correctly?
 AddGTest_FOUND:BOOL=true
 
@@ -206,6 +224,12 @@ Assimp_BINARY_DIR:STATIC=/Users/mathijs/HDMS DRIVE/opengine/external/assimp-3.3.
 
 //Value Computed by CMake
 Assimp_SOURCE_DIR:STATIC=/Users/mathijs/HDMS DRIVE/opengine/external/assimp-3.3.1
+
+//Build documentation using Doxygen.
+BUILD_DOCS:BOOL=OFF
+
+//Build package as Mac OS X Framework bundle.
+BUILD_FRAMEWORK:BOOL=OFF
 
 //Build package with shared libraries.
 BUILD_SHARED_LIBS:BOOL=OFF
@@ -281,11 +305,59 @@ CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 //Enable/Disable output of compile commands during generation.
 CMAKE_EXPORT_COMPILE_COMMANDS:BOOL=OFF
 
+//User executables (bin)
+CMAKE_INSTALL_BINDIR:PATH=bin
+
+//Read-only architecture-independent data (DATAROOTDIR)
+CMAKE_INSTALL_DATADIR:PATH=
+
+//Read-only architecture-independent data root (share)
+CMAKE_INSTALL_DATAROOTDIR:PATH=share
+
+//Documentation root (DATAROOTDIR/doc/PROJECT_NAME)
+CMAKE_INSTALL_DOCDIR:PATH=
+
+//C header files (include)
+CMAKE_INSTALL_INCLUDEDIR:PATH=include
+
+//Info documentation (DATAROOTDIR/info)
+CMAKE_INSTALL_INFODIR:PATH=
+
+//Object code libraries (lib)
+CMAKE_INSTALL_LIBDIR:PATH=lib
+
+//Program executables (libexec)
+CMAKE_INSTALL_LIBEXECDIR:PATH=libexec
+
+//Locale-dependent data (DATAROOTDIR/locale)
+CMAKE_INSTALL_LOCALEDIR:PATH=
+
+//Modifiable single-machine data (var)
+CMAKE_INSTALL_LOCALSTATEDIR:PATH=var
+
+//Man documentation (DATAROOTDIR/man)
+CMAKE_INSTALL_MANDIR:PATH=
+
 //Path to a program.
 CMAKE_INSTALL_NAME_TOOL:FILEPATH=/usr/bin/install_name_tool
 
+//C header files for non-gcc (/usr/include)
+CMAKE_INSTALL_OLDINCLUDEDIR:PATH=/usr/include
+
 //Install path prefix, prepended onto install directories.
 CMAKE_INSTALL_PREFIX:PATH=/usr/local
+
+//Run-time variable data (LOCALSTATEDIR/run)
+CMAKE_INSTALL_RUNSTATEDIR:PATH=
+
+//System admin executables (sbin)
+CMAKE_INSTALL_SBINDIR:PATH=sbin
+
+//Modifiable architecture-independent data (com)
+CMAKE_INSTALL_SHAREDSTATEDIR:PATH=com
+
+//Read-only single-machine data (etc)
+CMAKE_INSTALL_SYSCONFDIR:PATH=etc
 
 //Path to a program.
 CMAKE_LINKER:FILEPATH=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld
@@ -402,7 +474,7 @@ COCOA_FRAMEWORK:FILEPATH=/Applications/Xcode.app/Contents/Developer/Platforms/Ma
 CORE_FOUNDATION_FRAMEWORK:FILEPATH=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/CoreFoundation.framework
 
 //Doxygen documentation generation tool (http://www.doxygen.org)
-DOXYGEN_EXECUTABLE:FILEPATH=DOXYGEN_EXECUTABLE-NOTFOUND
+DOXYGEN_EXECUTABLE:FILEPATH=/usr/local/bin/doxygen
 
 //Single output directory for building all executables.
 EXECUTABLE_OUTPUT_PATH:PATH=
@@ -443,6 +515,12 @@ GLFW_USE_CHDIR:BOOL=ON
 //Populate the menu bar on first window creation
 GLFW_USE_MENUBAR:BOOL=ON
 
+//Don't call git to get the hash.
+IGNORE_GIT_HASH:BOOL=OFF
+
+//Inject debug postfix in .a/.so lib names
+INJECT_DEBUG_POSTFIX:BOOL=ON
+
 //Path to a library.
 IOKIT_FRAMEWORK:FILEPATH=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/IOKit.framework
 
@@ -471,6 +549,15 @@ Project_BINARY_DIR:STATIC=/Users/mathijs/HDMS DRIVE/opengine/external
 //Value Computed by CMake
 Project_SOURCE_DIR:STATIC=/Users/mathijs/HDMS DRIVE/opengine/external
 
+//The directory containing a CMake configuration file for Qt5.
+Qt5_DIR:PATH=Qt5_DIR-NOTFOUND
+
+//Path to a library.
+RT_LIBRARY:FILEPATH=RT_LIBRARY-NOTFOUND
+
+//Use system installed Irrlicht/IrrXML library.
+SYSTEM_IRRXML:BOOL=OFF
+
 //Path to a file.
 ZLIB_INCLUDE_DIR:PATH=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/include
 
@@ -481,7 +568,13 @@ ZLIB_LIBRARY_DBG:FILEPATH=/usr/lib/libz.dylib
 ZLIB_LIBRARY_REL:FILEPATH=/usr/lib/libz.dylib
 
 //Dependencies for the target
-assimp_LIB_DEPENDS:STATIC=optimized;/usr/lib/libz.dylib;debug;/usr/lib/libz.dylib;
+assimp_LIB_DEPENDS:STATIC=optimized;/usr/lib/libz.dylib;debug;/usr/lib/libz.dylib;general;IrrXML;
+
+//Value Computed by CMake
+assimp_qt_viewer_BINARY_DIR:STATIC=/Users/mathijs/HDMS DRIVE/opengine/external/assimp-3.3.1/tools/assimp_qt_viewer
+
+//Value Computed by CMake
+assimp_qt_viewer_SOURCE_DIR:STATIC=/Users/mathijs/HDMS DRIVE/opengine/external/assimp-3.3.1/tools/assimp_qt_viewer
 
 
 ########################
@@ -567,8 +660,40 @@ CMAKE_HAVE_PTHREAD_H:INTERNAL=1
 //Source directory with the top level CMakeLists.txt file for this
 // project
 CMAKE_HOME_DIRECTORY:INTERNAL=/Users/mathijs/HDMS DRIVE/opengine/external
+//ADVANCED property for variable: CMAKE_INSTALL_BINDIR
+CMAKE_INSTALL_BINDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_DATADIR
+CMAKE_INSTALL_DATADIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_DATAROOTDIR
+CMAKE_INSTALL_DATAROOTDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_DOCDIR
+CMAKE_INSTALL_DOCDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_INCLUDEDIR
+CMAKE_INSTALL_INCLUDEDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_INFODIR
+CMAKE_INSTALL_INFODIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_LIBDIR
+CMAKE_INSTALL_LIBDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_LIBEXECDIR
+CMAKE_INSTALL_LIBEXECDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_LOCALEDIR
+CMAKE_INSTALL_LOCALEDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_LOCALSTATEDIR
+CMAKE_INSTALL_LOCALSTATEDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_MANDIR
+CMAKE_INSTALL_MANDIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_INSTALL_NAME_TOOL
 CMAKE_INSTALL_NAME_TOOL-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_OLDINCLUDEDIR
+CMAKE_INSTALL_OLDINCLUDEDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_RUNSTATEDIR
+CMAKE_INSTALL_RUNSTATEDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_SBINDIR
+CMAKE_INSTALL_SBINDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_SHAREDSTATEDIR
+CMAKE_INSTALL_SHAREDSTATEDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_SYSCONFDIR
+CMAKE_INSTALL_SYSCONFDIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_LINKER
 CMAKE_LINKER-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MAKE_PROGRAM
@@ -586,7 +711,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=8
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=11
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
@@ -629,6 +754,8 @@ CMAKE_UNAME:INTERNAL=/usr/bin/uname
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: DOXYGEN_EXECUTABLE
 DOXYGEN_EXECUTABLE-ADVANCED:INTERNAL=1
+//Details about finding Doxygen
+FIND_PACKAGE_MESSAGE_DETAILS_Doxygen:INTERNAL=[/usr/local/bin/doxygen][cfound components:  doxygen ][v1.8.14()]
 //Details about finding Git
 FIND_PACKAGE_MESSAGE_DETAILS_Git:INTERNAL=[/usr/bin/git][v2.17.2 (Apple Git-113)()]
 //Details about finding OpenGL
@@ -637,6 +764,10 @@ FIND_PACKAGE_MESSAGE_DETAILS_OpenGL:INTERNAL=[/Applications/Xcode.app/Contents/D
 FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
 //ADVANCED property for variable: GIT_EXECUTABLE
 GIT_EXECUTABLE-ADVANCED:INTERNAL=1
+//IrrXML_Include
+IRRXML_INCLUDE_DIR:INTERNAL=/Users/mathijs/HDMS DRIVE/opengine/external/assimp-3.3.1/contrib/irrXML
+//IrrXML
+IRRXML_LIBRARY:INTERNAL=IrrXML
 //ADVANCED property for variable: OPENGL_INCLUDE_DIR
 OPENGL_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: OPENGL_gl_LIBRARY
@@ -645,6 +776,8 @@ OPENGL_gl_LIBRARY-ADVANCED:INTERNAL=1
 OPENGL_glu_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PKG_CONFIG_EXECUTABLE
 PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: RT_LIBRARY
+RT_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: ZLIB_INCLUDE_DIR
 ZLIB_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: ZLIB_LIBRARY_DBG
@@ -653,4 +786,6 @@ ZLIB_LIBRARY_DBG-ADVANCED:INTERNAL=1
 ZLIB_LIBRARY_REL-ADVANCED:INTERNAL=1
 //x
 ZLIB_PREFIX_PATH_INT_CHECK:INTERNAL=
+//CMAKE_INSTALL_PREFIX during last run
+_GNUInstallDirs_LAST_CMAKE_INSTALL_PREFIX:INTERNAL=/usr/local
 

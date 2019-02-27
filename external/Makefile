@@ -116,7 +116,7 @@ install/fast: preinstall/fast
 
 # Special rule for the target list_install_components
 list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\" \"assimp-bin\" \"assimp-dev\" \"libassimp3.3.1-dev\""
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\" \"assimp-bin\" \"assimp-dev\" \"libassimp4.1.0\" \"libassimp4.1.0-dev\""
 .PHONY : list_install_components
 
 # Special rule for the target list_install_components
@@ -196,6 +196,19 @@ uninstall/fast:
 .PHONY : uninstall/fast
 
 #=============================================================================
+# Target rules for targets named IrrXML
+
+# Build rule for target.
+IrrXML: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 IrrXML
+.PHONY : IrrXML
+
+# fast build rule for target.
+IrrXML/fast:
+	$(MAKE) -f assimp-3.3.1/contrib/irrXML/CMakeFiles/IrrXML.dir/build.make assimp-3.3.1/contrib/irrXML/CMakeFiles/IrrXML.dir/build
+.PHONY : IrrXML/fast
+
+#=============================================================================
 # Target rules for targets named assimp
 
 # Build rule for target.
@@ -234,19 +247,6 @@ unit/fast:
 	$(MAKE) -f assimp-3.3.1/test/CMakeFiles/unit.dir/build.make assimp-3.3.1/test/CMakeFiles/unit.dir/build
 .PHONY : unit/fast
 
-#=============================================================================
-# Target rules for targets named gtest
-
-# Build rule for target.
-gtest: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 gtest
-.PHONY : gtest
-
-# fast build rule for target.
-gtest/fast:
-	$(MAKE) -f assimp-3.3.1/test/CMakeFiles/gtest.dir/build.make assimp-3.3.1/test/CMakeFiles/gtest.dir/build
-.PHONY : gtest/fast
-
 # target to build an object file
 glad/src/glad.o:
 	$(MAKE) -f CMakeFiles/GLAD.dir/build.make CMakeFiles/GLAD.dir/glad/src/glad.o
@@ -277,10 +277,10 @@ help:
 	@echo "... list_install_components"
 	@echo "... GLFW_303"
 	@echo "... uninstall"
+	@echo "... IrrXML"
 	@echo "... assimp"
 	@echo "... assimp_cmd"
 	@echo "... unit"
-	@echo "... gtest"
 	@echo "... glad/src/glad.o"
 	@echo "... glad/src/glad.i"
 	@echo "... glad/src/glad.s"

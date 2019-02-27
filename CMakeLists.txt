@@ -41,6 +41,7 @@ include_directories(
 	external/glm-0.9.8.4/
 	external/glad/include/glad/
 	external/assimp/include/
+	external/freetype-2.9.1/include/
 	.
 )
 
@@ -60,17 +61,18 @@ add_definitions(
 
 # src (libcommon.a)
 add_library(src
-    	src/Renderer/renderer.h
-    	src/Renderer/renderer.cpp
-			src/Renderer/shader.h
-			src/config.h
-			src/Maths/glm.h
-			src/Renderer/camera.h
-			src/Renderer/camera.cpp
-			src/Model/model.h
-			src/Model/mesh.h
-			src/Texture/stb_image.cpp
-			src/Texture/stb_image.h
+    src/Renderer/renderer.h
+    src/Renderer/renderer.cpp
+		src/Renderer/shader.h
+		src/Renderer/camera.h
+		src/Maths/glm.h
+		src/Model/model.h
+		src/Model/mesh.h
+		src/Texture/stb_image.cpp
+		src/Texture/stb_image.h
+		src/config.h
+		src/Texture/Texture.cpp
+		src/Texture/Texture.h
 )
 
 # Demo

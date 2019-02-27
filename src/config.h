@@ -1,9 +1,12 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
+/**
+ A structure for configuration variables
+ */
 struct config {
-  int xRes = 1280;
-  int yRes = 720;
+  float xRes = 1280;
+  float yRes = 720;
   bool isFullscreen = false;
   int fov = 90;
 };
