@@ -32,6 +32,12 @@ Renderer::~Renderer() {
 
 }
 
+void Renderer::DrawSkybox() {
+  Skybox sky;
+  sky.loadSkybox("engine/assets/Sprites/Skybox/front.tga", "engine/assets/Sprites/Skybox/bacl.tga", "engine/assets/Sprites/Skybox/bottom.tga",
+    "engine/assets/Sprites/Skybox/top.tga", "engine/assets/Sprites/Skybox/left.tga", "engine/assets/Sprites/Skybox/right.tga");
+}
+
 /**
  Input to close the window.
  Input key is the escape button.
@@ -47,7 +53,6 @@ void Renderer::processInput(GLFWwindow *window) {
  A function to clean up the window before it's being closed.
  */
 void Renderer::cleanUp() {
-  glDeleteVertexArrays(1, &skyboxVAO);
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
     glDeleteBuffers(1, &EBO);

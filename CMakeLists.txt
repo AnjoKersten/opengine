@@ -73,6 +73,7 @@ add_library(src
 		src/config.h
 		src/Texture/Texture.cpp
 		src/Texture/Texture.h
+		src/Graphics/skybox.h
 )
 
 # Demo

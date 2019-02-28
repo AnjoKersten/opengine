@@ -37,6 +37,8 @@ int main() {
         renderer.processInput(renderer.window);
         camera.processInput(renderer.window);
 
+        renderer.DrawSkybox();
+
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // also clear the depth buffer now!
 
         demoShader.use();
