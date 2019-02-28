@@ -17,17 +17,18 @@ Include classes here
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
+Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+
 int main() {
-    Camera camera;
     Renderer renderer;
+    config con;
 
     Shader demoShader("../src/shaders/modelVertex.vs", "../src/shaders/modelFrag.fs");
-    Model myModel("assets/box_stack.obj");
+    Model myModel("assets/Models/Bear/bear.obj");
 
     demoShader.use();
 
     glfwSetFramebufferSizeCallback(renderer.window, framebuffer_size_callback);
-    demoShader.setMat4("projection", camera.projection);
 
     glfwSetFramebufferSizeCallback(renderer.window, framebuffer_size_callback);
 
@@ -39,8 +40,10 @@ int main() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // also clear the depth buffer now!
 
         demoShader.use();
-        camera.update();
-        demoShader.setMat4("view", camera.view);
+        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), con.xRes / con.yRes, 0.1f, 100.0f);
+		    glm::mat4 view = camera.GetViewMatrix();
+		    demoShader.setMat4("projection", projection);
+		    demoShader.setMat4("view", view);
 
         // Draw the loaded model
     		glm::mat4 model;
