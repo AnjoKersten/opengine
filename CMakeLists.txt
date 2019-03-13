@@ -41,7 +41,6 @@ include_directories(
 	external/glm-0.9.8.4/
 	external/glad/include/glad/
 	external/assimp/include/
-	external/freetype-2.9.1/include/
 	.
 )
 
@@ -74,9 +73,11 @@ add_library(src
 		src/Texture/Texture.cpp
 		src/Texture/Texture.h
 		src/Graphics/skybox.h
+		src/Renderer/Color.h
+		src/Renderer/color.cpp
 )
 
-# Demo
+# Engine
 add_executable(engine
 	engine/main.cpp
 )

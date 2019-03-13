@@ -4,10 +4,9 @@
 #include <glfw3.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <vector>
 
 #include "../config.h"
-
-#include <vector>
 
 // Defines several possible options for camera movement. Used as abstraction to stay away from window-system specific input methods
 enum Camera_Movement {
@@ -44,8 +43,6 @@ public:
 	float MouseSensitivity;
 	float Zoom;
 
-	config con;
-
     // timing
     float deltaTime = 0.0f;
     float lastFrame = 0.0f;
@@ -74,8 +71,7 @@ public:
 	}
 
 	// Returns the view matrix calculated using Euler Angles and the LookAt Matrix
-	glm::mat4 GetViewMatrix()
-	{
+	glm::mat4 GetViewMatrix() {
 		return glm::lookAt(Position, Position + Front, Up);
 	}
 
@@ -183,5 +179,7 @@ private:
 		Right = glm::normalize(glm::cross(Front, WorldUp));  // Normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
 		Up    = glm::normalize(glm::cross(Right, Front));
 	}
+
+	config con;
 };
 #endif

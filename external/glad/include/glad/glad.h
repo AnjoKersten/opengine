@@ -51,7 +51,7 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
+#endif }
 
 struct gladGLversionStruct {
     int major;

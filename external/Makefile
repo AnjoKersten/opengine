@@ -48,7 +48,7 @@ RM = /usr/local/Cellar/cmake/3.12.4/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/Users/mathijs/HDMS DRIVE/opengine/external"
+CMAKE_SOURCE_DIR = "/Users/mathijs/HDMS DRIVE/opengine"
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = "/Users/mathijs/HDMS DRIVE/opengine/external"
@@ -67,28 +67,6 @@ install/local/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
 	/usr/local/Cellar/cmake/3.12.4/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local/fast
-
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/local/Cellar/cmake/3.12.4/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/local/Cellar/cmake/3.12.4/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
 
 # Special rule for the target install/strip
 install/strip: preinstall
@@ -124,6 +102,28 @@ list_install_components/fast: list_install_components
 
 .PHONY : list_install_components/fast
 
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/local/Cellar/cmake/3.12.4/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/usr/local/Cellar/cmake/3.12.4/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
+
 # The main all target
 all: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start "/Users/mathijs/HDMS DRIVE/opengine/external/CMakeFiles" "/Users/mathijs/HDMS DRIVE/opengine/external/CMakeFiles/progress.marks"
@@ -157,6 +157,32 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named engine
+
+# Build rule for target.
+engine: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 engine
+.PHONY : engine
+
+# fast build rule for target.
+engine/fast:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/build
+.PHONY : engine/fast
+
+#=============================================================================
+# Target rules for targets named src
+
+# Build rule for target.
+src: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 src
+.PHONY : src
+
+# fast build rule for target.
+src/fast:
+	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/build
+.PHONY : src/fast
+
+#=============================================================================
 # Target rules for targets named GLAD
 
 # Build rule for target.
@@ -166,7 +192,7 @@ GLAD: cmake_check_build_system
 
 # fast build rule for target.
 GLAD/fast:
-	$(MAKE) -f CMakeFiles/GLAD.dir/build.make CMakeFiles/GLAD.dir/build
+	$(MAKE) -f external/CMakeFiles/GLAD.dir/build.make external/CMakeFiles/GLAD.dir/build
 .PHONY : GLAD/fast
 
 #=============================================================================
@@ -179,7 +205,7 @@ GLFW_303: cmake_check_build_system
 
 # fast build rule for target.
 GLFW_303/fast:
-	$(MAKE) -f glfw-3.0.3/src/CMakeFiles/GLFW_303.dir/build.make glfw-3.0.3/src/CMakeFiles/GLFW_303.dir/build
+	$(MAKE) -f external/glfw-3.0.3/src/CMakeFiles/GLFW_303.dir/build.make external/glfw-3.0.3/src/CMakeFiles/GLFW_303.dir/build
 .PHONY : GLFW_303/fast
 
 #=============================================================================
@@ -192,7 +218,7 @@ uninstall: cmake_check_build_system
 
 # fast build rule for target.
 uninstall/fast:
-	$(MAKE) -f assimp-3.3.1/CMakeFiles/uninstall.dir/build.make assimp-3.3.1/CMakeFiles/uninstall.dir/build
+	$(MAKE) -f external/assimp-3.3.1/CMakeFiles/uninstall.dir/build.make external/assimp-3.3.1/CMakeFiles/uninstall.dir/build
 .PHONY : uninstall/fast
 
 #=============================================================================
@@ -205,7 +231,7 @@ IrrXML: cmake_check_build_system
 
 # fast build rule for target.
 IrrXML/fast:
-	$(MAKE) -f assimp-3.3.1/contrib/irrXML/CMakeFiles/IrrXML.dir/build.make assimp-3.3.1/contrib/irrXML/CMakeFiles/IrrXML.dir/build
+	$(MAKE) -f external/assimp-3.3.1/contrib/irrXML/CMakeFiles/IrrXML.dir/build.make external/assimp-3.3.1/contrib/irrXML/CMakeFiles/IrrXML.dir/build
 .PHONY : IrrXML/fast
 
 #=============================================================================
@@ -218,7 +244,7 @@ assimp: cmake_check_build_system
 
 # fast build rule for target.
 assimp/fast:
-	$(MAKE) -f assimp-3.3.1/code/CMakeFiles/assimp.dir/build.make assimp-3.3.1/code/CMakeFiles/assimp.dir/build
+	$(MAKE) -f external/assimp-3.3.1/code/CMakeFiles/assimp.dir/build.make external/assimp-3.3.1/code/CMakeFiles/assimp.dir/build
 .PHONY : assimp/fast
 
 #=============================================================================
@@ -231,7 +257,7 @@ assimp_cmd: cmake_check_build_system
 
 # fast build rule for target.
 assimp_cmd/fast:
-	$(MAKE) -f assimp-3.3.1/tools/assimp_cmd/CMakeFiles/assimp_cmd.dir/build.make assimp-3.3.1/tools/assimp_cmd/CMakeFiles/assimp_cmd.dir/build
+	$(MAKE) -f external/assimp-3.3.1/tools/assimp_cmd/CMakeFiles/assimp_cmd.dir/build.make external/assimp-3.3.1/tools/assimp_cmd/CMakeFiles/assimp_cmd.dir/build
 .PHONY : assimp_cmd/fast
 
 #=============================================================================
@@ -244,23 +270,116 @@ unit: cmake_check_build_system
 
 # fast build rule for target.
 unit/fast:
-	$(MAKE) -f assimp-3.3.1/test/CMakeFiles/unit.dir/build.make assimp-3.3.1/test/CMakeFiles/unit.dir/build
+	$(MAKE) -f external/assimp-3.3.1/test/CMakeFiles/unit.dir/build.make external/assimp-3.3.1/test/CMakeFiles/unit.dir/build
 .PHONY : unit/fast
 
+engine/main.o: engine/main.cpp.o
+
+.PHONY : engine/main.o
+
 # target to build an object file
-glad/src/glad.o:
-	$(MAKE) -f CMakeFiles/GLAD.dir/build.make CMakeFiles/GLAD.dir/glad/src/glad.o
-.PHONY : glad/src/glad.o
+engine/main.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/engine/main.cpp.o
+.PHONY : engine/main.cpp.o
+
+engine/main.i: engine/main.cpp.i
+
+.PHONY : engine/main.i
 
 # target to preprocess a source file
-glad/src/glad.i:
-	$(MAKE) -f CMakeFiles/GLAD.dir/build.make CMakeFiles/GLAD.dir/glad/src/glad.i
-.PHONY : glad/src/glad.i
+engine/main.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/engine/main.cpp.i
+.PHONY : engine/main.cpp.i
+
+engine/main.s: engine/main.cpp.s
+
+.PHONY : engine/main.s
 
 # target to generate assembly for a file
-glad/src/glad.s:
-	$(MAKE) -f CMakeFiles/GLAD.dir/build.make CMakeFiles/GLAD.dir/glad/src/glad.s
-.PHONY : glad/src/glad.s
+engine/main.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/engine/main.cpp.s
+.PHONY : engine/main.cpp.s
+
+src/Renderer/renderer.o: src/Renderer/renderer.cpp.o
+
+.PHONY : src/Renderer/renderer.o
+
+# target to build an object file
+src/Renderer/renderer.cpp.o:
+	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/src/Renderer/renderer.cpp.o
+.PHONY : src/Renderer/renderer.cpp.o
+
+src/Renderer/renderer.i: src/Renderer/renderer.cpp.i
+
+.PHONY : src/Renderer/renderer.i
+
+# target to preprocess a source file
+src/Renderer/renderer.cpp.i:
+	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/src/Renderer/renderer.cpp.i
+.PHONY : src/Renderer/renderer.cpp.i
+
+src/Renderer/renderer.s: src/Renderer/renderer.cpp.s
+
+.PHONY : src/Renderer/renderer.s
+
+# target to generate assembly for a file
+src/Renderer/renderer.cpp.s:
+	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/src/Renderer/renderer.cpp.s
+.PHONY : src/Renderer/renderer.cpp.s
+
+src/Texture/Texture.o: src/Texture/Texture.cpp.o
+
+.PHONY : src/Texture/Texture.o
+
+# target to build an object file
+src/Texture/Texture.cpp.o:
+	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/src/Texture/Texture.cpp.o
+.PHONY : src/Texture/Texture.cpp.o
+
+src/Texture/Texture.i: src/Texture/Texture.cpp.i
+
+.PHONY : src/Texture/Texture.i
+
+# target to preprocess a source file
+src/Texture/Texture.cpp.i:
+	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/src/Texture/Texture.cpp.i
+.PHONY : src/Texture/Texture.cpp.i
+
+src/Texture/Texture.s: src/Texture/Texture.cpp.s
+
+.PHONY : src/Texture/Texture.s
+
+# target to generate assembly for a file
+src/Texture/Texture.cpp.s:
+	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/src/Texture/Texture.cpp.s
+.PHONY : src/Texture/Texture.cpp.s
+
+src/Texture/stb_image.o: src/Texture/stb_image.cpp.o
+
+.PHONY : src/Texture/stb_image.o
+
+# target to build an object file
+src/Texture/stb_image.cpp.o:
+	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/src/Texture/stb_image.cpp.o
+.PHONY : src/Texture/stb_image.cpp.o
+
+src/Texture/stb_image.i: src/Texture/stb_image.cpp.i
+
+.PHONY : src/Texture/stb_image.i
+
+# target to preprocess a source file
+src/Texture/stb_image.cpp.i:
+	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/src/Texture/stb_image.cpp.i
+.PHONY : src/Texture/stb_image.cpp.i
+
+src/Texture/stb_image.s: src/Texture/stb_image.cpp.s
+
+.PHONY : src/Texture/stb_image.s
+
+# target to generate assembly for a file
+src/Texture/stb_image.cpp.s:
+	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/src/Texture/stb_image.cpp.s
+.PHONY : src/Texture/stb_image.cpp.s
 
 # Help Target
 help:
@@ -269,21 +388,32 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... install/local"
-	@echo "... GLAD"
-	@echo "... rebuild_cache"
-	@echo "... edit_cache"
 	@echo "... install/strip"
 	@echo "... install"
 	@echo "... list_install_components"
+	@echo "... rebuild_cache"
+	@echo "... edit_cache"
+	@echo "... engine"
+	@echo "... src"
+	@echo "... GLAD"
 	@echo "... GLFW_303"
 	@echo "... uninstall"
 	@echo "... IrrXML"
 	@echo "... assimp"
 	@echo "... assimp_cmd"
 	@echo "... unit"
-	@echo "... glad/src/glad.o"
-	@echo "... glad/src/glad.i"
-	@echo "... glad/src/glad.s"
+	@echo "... engine/main.o"
+	@echo "... engine/main.i"
+	@echo "... engine/main.s"
+	@echo "... src/Renderer/renderer.o"
+	@echo "... src/Renderer/renderer.i"
+	@echo "... src/Renderer/renderer.s"
+	@echo "... src/Texture/Texture.o"
+	@echo "... src/Texture/Texture.i"
+	@echo "... src/Texture/Texture.s"
+	@echo "... src/Texture/stb_image.o"
+	@echo "... src/Texture/stb_image.i"
+	@echo "... src/Texture/stb_image.s"
 .PHONY : help
 
 

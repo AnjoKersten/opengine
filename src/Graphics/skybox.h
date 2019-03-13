@@ -3,35 +3,28 @@
 
 #include <iostream>
 #include <vector>
+#include <string>
+#include <glad.h>
+#include <glfw3.h>
+
 #include "../Texture/stb_image.h"
 
 using namespace std;
 
 class Skybox {
 public:
-  Skybox() {
 
-  }
-
-  virtual ~Skybox() {}
-
-  unsigned int loadSkybox(string frontPath, string backPath, string bottomPath, string topPath, string leftPath, string rightPath) {
-    unsigned int texID;
+  unsigned int loadSkybox(vector<string> faces) {
     glGenTextures(1, &texID);
     glBindTexture(GL_TEXTURE_CUBE_MAP, texID);
 
-    int width, height, nrChannels;
-    for (unsigned int i = 0; i < faces(frontPath, backPath, bottomPath, topPath, leftPath, rightPath).size(); i++)
-    {
-        unsigned char *data = stbi_load(faces(frontPath, backPath, bottomPath, topPath, leftPath, rightPath)[i].c_str(), &width, &height, &nrChannels, 0);
-        if (data)
-        {
+    for (unsigned int i = 0; i < faces.size(); i++) {
+        data = stbi_load(faces[i].c_str(), &width, &height, &nrChannels, 0);
+        if (data) {
             glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
             stbi_image_free(data);
-        }
-        else
-        {
-            //std::cout << "Cubemap texture failed to load at path: " << faces[i] << std::endl;
+        } else {
+            std::cout << "Cubemap texture failed to load at path: " << faces[i] << std::endl;
             stbi_image_free(data);
         }
     }
@@ -43,8 +36,6 @@ public:
 
     return texID;
   }
-
-private:
 
   float skyboxVertices[108] = {
         // positions
@@ -89,16 +80,13 @@ private:
          1.0f, -1.0f, -1.0f,
         -1.0f, -1.0f,  1.0f,
          1.0f, -1.0f,  1.0f
-    };
+  };
 
-    vector<string> faces(string frontPath, string backPath, string bottomPath, string topPath, string leftPath, string rightPath) {
-      rightPath,
-      leftPath,
-      topPath,
-      bottomPath,
-      frontPath,
-      backPath;
-    }
+  unsigned int texID;
+
+private:
+  int width, height, nrChannels;
+  unsigned char *data;
 };
 
 #endif

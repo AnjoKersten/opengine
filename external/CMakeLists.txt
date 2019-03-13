@@ -19,7 +19,6 @@ include_directories(
     glfw-3.0.3/include/GLFW/
     glad/include/glad/
     assimp/include/
-    freetype-2.9.1/include/
 )
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
