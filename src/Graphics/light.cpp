@@ -2,6 +2,7 @@
 
 Light::Light(lightTypes type, Shader shader) {
     lType = type;
+    lShader = shader;
     glGenVertexArrays(1, &lightVAO);
 	glBindVertexArray(lightVAO);
 }

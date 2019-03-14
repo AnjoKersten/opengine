@@ -24,12 +24,12 @@ int main() {
     config con;
     std::cout << "Test" << std::endl;
 
-    Shader demoShader("../src/Shaders/modelVertex.vs", "../src/Shaders/modelFrag.fs");
+    Shader demoShader("../src/Shaders/model.vs", "../src/Shaders/model.fs");
     Model myModel("assets/Models/Bear/bear.obj");
 
     //temporary 
-    Shader skyboxShader("../src/Shaders/skyboxVertex.vs", "../src/Shaders/skyboxFrag.fs");
-    Shader cubemapShader("../src/Shaders/cubemapVertex.vs", "../src/Shaders/cubemapFrag.fs");
+    Shader skyboxShader("../src/Shaders/skybox.vs", "../src/Shaders/skybox.fs");
+    Shader cubemapShader("../src/Shaders/cubemap.vs", "../src/Shaders/cubemap.fs");
 
     //temporary
     vector<string> const faces {

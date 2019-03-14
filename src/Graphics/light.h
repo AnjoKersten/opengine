@@ -16,4 +16,5 @@ public:
     Light(lightTypes type, Shader shader);
     virtual ~Light();
     void SetDirectionalLight(Camera cam);
+    Shader lShader;
 };
