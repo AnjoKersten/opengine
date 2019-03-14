@@ -13,18 +13,17 @@ Include classes here
 #include "src/Renderer/shader.h"
 #include "src/Model/model.h"
 #include "src/Renderer/camera.h"
+#include "src/Graphics/Light.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 
 int main() {
-    std::cout << "Test" << std::endl;
     Renderer renderer;
     config con;
-    std::cout << "Test" << std::endl;
 
-    Shader demoShader("../src/Shaders/model.vs", "../src/Shaders/model.fs");
+    Shader modelShader("../src/Shaders/model.vs", "../src/Shaders/model.fs");
     Model myModel("assets/Models/Bear/bear.obj");
 
     //temporary 
@@ -33,12 +32,12 @@ int main() {
 
     //temporary
     vector<string> const faces {
-        "assets/Sprites/Skybox/right.tga",
-		    "assets/Sprites/Skybox/left.tga",
-		    "assets/Sprites/Skybox/top.tga",
-		    "assets/Sprites/Skybox/bottom.tga",
-		    "assets/Sprites/Skybox/front.tga",
-		    "assets/Sprites/Skybox/back.tga"
+        // "assets/Sprites/Skybox/right.tga",
+		//     "assets/Sprites/Skybox/left.tga",
+		//     "assets/Sprites/Skybox/top.tga",
+		//     "assets/Sprites/Skybox/bottom.tga",
+		//     "assets/Sprites/Skybox/front.tga",
+		//     "assets/Sprites/Skybox/back.tga"
     };
 
     renderer.setupSkybox(cubemapShader, skyboxShader);
@@ -55,15 +54,15 @@ int main() {
         demoShader.use();
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), con.xRes / con.yRes, 0.1f, 100.0f);
         glm::mat4 view = camera.GetViewMatrix();
-		    demoShader.setMat4("projection", projection);
-		    demoShader.setMat4("view", view);
+		demoShader.setMat4("projection", projection);
+		demoShader.setMat4("view", view);
 
         // Draw the loaded model
-    		glm::mat4 model;
-    		model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f)); // Translate it down a bit so it's at the center of the scene
-    		model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// It's a bit too big for our scene, so scale it down
-    		glUniformMatrix4fv(glGetUniformLocation(demoShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(model));
-    		myModel.Draw(demoShader);
+    	glm::mat4 model;
+    	model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f)); // Translate it down a bit so it's at the center of the scene
+    	model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// It's a bit too big for our scene, so scale it down
+    	glUniformMatrix4fv(glGetUniformLocation(demoShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(model));
+    	myModel.Draw(modelShader);
 
         view = glm::mat4(glm::mat3(camera.GetViewMatrix()));
         renderer.drawSkybox(projection, view, faces, skyboxShader);
