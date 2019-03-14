@@ -31,7 +31,7 @@ struct Vertex {
 /**
  A texture structure
  */
-struct Texture {
+struct MeshTexture {
 	GLuint id;
 	string type;
 	aiString path;
@@ -44,14 +44,14 @@ public:
 	 */
 	vector<Vertex> vertices;
 	vector<GLuint> indices;
-	vector<Texture> textures;
+	vector<MeshTexture> textures;
 
 	/**
 	 Constructor
 	 sets the vertex buffers and its attribute pointers.
 	 Expects a vector of vertices, a vector of indices & a vector of textures.
 	 */
-	Mesh(vector<Vertex> vertices, vector<GLuint> indices, vector<Texture> textures) {
+	Mesh(vector<Vertex> vertices, vector<GLuint> indices, vector<MeshTexture> textures) {
 		this->vertices = vertices;
 		this->indices = indices;
 		this->textures = textures;

@@ -47,7 +47,7 @@ private:
 	/*  Model Data  */
 	vector<Mesh> meshes;
 	string directory;
-	vector<Texture> textures_loaded;	// Stores all the textures loaded so far, optimization to make sure textures aren't loaded more than once.
+	vector<MeshTexture> textures_loaded;	// Stores all the textures loaded so far, optimization to make sure textures aren't loaded more than once.
 
 										/*  Functions   */
 										// Loads a model with supported ASSIMP extensions from file and stores the resulting meshes in the meshes vector.
@@ -95,7 +95,7 @@ private:
 		// Data to fill
 		vector<Vertex> vertices;
 		vector<GLuint> indices;
-		vector<Texture> textures;
+		vector<MeshTexture> textures;
 
 		// Walk through each of the mesh's vertices
 		for (GLuint i = 0; i < mesh->mNumVertices; i++)
@@ -156,11 +156,11 @@ private:
 			// Normal: texture_normalN
 
 			// 1. Diffuse maps
-			vector<Texture> diffuseMaps = this->loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
+			vector<MeshTexture> diffuseMaps = this->loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
 			textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
 
 			// 2. Specular maps
-			vector<Texture> specularMaps = this->loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
+			vector<MeshTexture> specularMaps = this->loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
 			textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
 		}
 
@@ -170,9 +170,9 @@ private:
 
 	// Checks all material textures of a given type and loads the textures if they're not loaded yet.
 	// The required info is returned as a Texture struct.
-	vector<Texture> loadMaterialTextures(aiMaterial *mat, aiTextureType type, string typeName)
+	vector<MeshTexture> loadMaterialTextures(aiMaterial *mat, aiTextureType type, string typeName)
 	{
-		vector<Texture> textures;
+		vector<MeshTexture> textures;
 
 		for (GLuint i = 0; i < mat->GetTextureCount(type); i++)
 		{
@@ -195,7 +195,7 @@ private:
 
 			if (!skip)
 			{   // If texture hasn't been loaded already, load it
-				Texture texture;
+				MeshTexture texture;
 				texture.id = TextureFromFile(str.C_Str(), this->directory);
 				texture.type = typeName;
 				texture.path = str;

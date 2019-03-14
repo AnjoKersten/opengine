@@ -30,15 +30,19 @@ int main() {
     Shader skyboxShader("../src/Shaders/skybox.vs", "../src/Shaders/skybox.fs");
     Shader cubemapShader("../src/Shaders/cubemap.vs", "../src/Shaders/cubemap.fs");
 
+    Shader lightShader("../src/Shaders/light.vs", "../src/Shaders/light.fs");
+
     //temporary
     vector<string> const faces {
-        // "assets/Sprites/Skybox/right.tga",
-		//     "assets/Sprites/Skybox/left.tga",
-		//     "assets/Sprites/Skybox/top.tga",
-		//     "assets/Sprites/Skybox/bottom.tga",
-		//     "assets/Sprites/Skybox/front.tga",
-		//     "assets/Sprites/Skybox/back.tga"
+        "assets/Sprites/Skybox/right.tga",
+		    "assets/Sprites/Skybox/left.tga",
+		    "assets/Sprites/Skybox/top.tga",
+		    "assets/Sprites/Skybox/bottom.tga",
+		    "assets/Sprites/Skybox/front.tga",
+		    "assets/Sprites/Skybox/back.tga"
     };
+
+    Light dir(Directional, lightShader);
 
     renderer.setupSkybox(cubemapShader, skyboxShader);
 
@@ -51,6 +55,8 @@ int main() {
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // also clear the depth buffer now!
 
+        dir.SetDirectionalLight(camera);
+
         modelShader.use();
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), con.xRes / con.yRes, 0.1f, 100.0f);
         glm::mat4 view = camera.GetViewMatrix();
@@ -62,7 +68,11 @@ int main() {
     	model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f)); // Translate it down a bit so it's at the center of the scene
     	model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// It's a bit too big for our scene, so scale it down
     	glUniformMatrix4fv(glGetUniformLocation(modelShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(model));
-    	myModel.Draw(modelShader);
+
+        dir.lShader.setMat4("projection", projection);
+		dir.lShader.setMat4("view", view);
+
+    	myModel.Draw(dir.lShader);
 
         view = glm::mat4(glm::mat3(camera.GetViewMatrix()));
         renderer.drawSkybox(projection, view, faces, skyboxShader);

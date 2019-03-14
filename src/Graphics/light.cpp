@@ -25,6 +25,7 @@ void Light::SetSpecularMap(const char *texPath) {
 
 void Light::SetDirectionalLight(Camera cam) {
     if (lType == Directional) {
+        std::cout << "Directional light is activated" << std::endl;
         lShader.use();
 		lShader.setVec3("light.direction", -4.0f, -16.0f, -6.0f);
 		lShader.setVec3("viewPos", cam.Position);
