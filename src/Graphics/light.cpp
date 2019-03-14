@@ -11,6 +11,12 @@ Light::~Light() {
 
 }
 
+void Light::SetDiffuseMap(const char *texPath) {
+    Texture diffMap(texPath);
+	glActiveTexture(GL_TEXTURE0);
+	lShader.setInt("material.diffuse", 0);
+}
+
 void Light::SetDirectionalLight(Camera cam) {
     if (lType == Directional) {
         lShader.use();

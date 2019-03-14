@@ -3,6 +3,7 @@
 
 #include "../Renderer/shader.h"
 #include "../Renderer/camera.h"
+#include "../Texture/Texture.h"
 
 enum lightTypes {
     Directional
@@ -15,6 +16,8 @@ private:
 public:
     Light(lightTypes type, Shader shader);
     virtual ~Light();
+    void SetDiffuseMap(const char *texPath);
+    void SetSpecularMap(const char *texPath);
     void SetDirectionalLight(Camera cam);
     Shader lShader;
 };

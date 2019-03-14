@@ -51,17 +51,17 @@ int main() {
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // also clear the depth buffer now!
 
-        demoShader.use();
+        modelShader.use();
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), con.xRes / con.yRes, 0.1f, 100.0f);
         glm::mat4 view = camera.GetViewMatrix();
-		demoShader.setMat4("projection", projection);
-		demoShader.setMat4("view", view);
+		modelShader.setMat4("projection", projection);
+		modelShader.setMat4("view", view);
 
         // Draw the loaded model
     	glm::mat4 model;
     	model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f)); // Translate it down a bit so it's at the center of the scene
     	model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// It's a bit too big for our scene, so scale it down
-    	glUniformMatrix4fv(glGetUniformLocation(demoShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(model));
+    	glUniformMatrix4fv(glGetUniformLocation(modelShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(model));
     	myModel.Draw(modelShader);
 
         view = glm::mat4(glm::mat3(camera.GetViewMatrix()));
