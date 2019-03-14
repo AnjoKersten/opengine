@@ -49,7 +49,7 @@ void Renderer::setupSkybox(Shader cubemapShader, Shader skyboxShader) {
 
 void Renderer::drawSkybox(glm::mat4 view, glm::mat4 projection, vector<string> faces, Shader skyboxShader) {
     //Shader skyboxShader("../Shaders/skyboxVertex.vs", "../Shaders/skyboxFrag.fs");
-    unsigned int cubemapTexture = box.loadSkybox(faces); // <- Segmentation fault 11 here
+    unsigned int cubemapTexture = box.loadSkybox(faces); 
     glDepthFunc(GL_LEQUAL);
     skyboxShader.use();
     skyboxShader.setMat4("view", view);

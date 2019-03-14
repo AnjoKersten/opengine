@@ -17,7 +17,6 @@ public:
   unsigned int loadSkybox(vector<string> faces) {
     glGenTextures(1, &texID);
     glBindTexture(GL_TEXTURE_CUBE_MAP, texID);
-
     for (unsigned int i = 0; i < faces.size(); i++) {
         data = stbi_load(faces[i].c_str(), &width, &height, &nrChannels, 0);
         if (data) {
