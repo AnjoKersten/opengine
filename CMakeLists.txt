@@ -75,6 +75,8 @@ add_library(src
 		src/Graphics/skybox.h
 		src/Renderer/Color.h
 		src/Renderer/color.cpp
+		src/Graphics/light.h
+		src/Graphics/light.cpp
 )
 
 # Engine
