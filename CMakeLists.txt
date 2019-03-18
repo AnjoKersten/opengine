@@ -94,6 +94,8 @@ add_library(src
 		src/Renderer/color.cpp
 		src/Graphics/light.h
 		src/Graphics/light.cpp
+		src/UI/UIText.h
+		src/UI/UIText.cpp
 )
 
 # Engine
