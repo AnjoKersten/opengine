@@ -41,6 +41,11 @@ include_directories(
 	external/glm-0.9.8.4/
 	external/glad/include/glad/
 	external/assimp/include/
+
+	# freetype
+  ${CMAKE_SOURCE_DIR}/external/freetype-2.8.1/include
+  ${CMAKE_SOURCE_DIR}/external/freetype-2.8.1/src
+	
 	.
 )
 
@@ -48,6 +53,18 @@ set(ALL_GRAPHICS_LIBS
 	${OPENGL_LIBRARY}
 	GLFW_303
 	GLAD
+)
+
+#################
+### FREETYPE2 ###
+#################
+
+set (FREETYPE2_INCLUDE_DIR
+  ${CMAKE_CURRENT_SOURCE_DIR}/external/freetype-2.8.1
+)
+
+add_subdirectory(
+  external/freetype-2.8.1
 )
 
 add_definitions(
