@@ -13,15 +13,26 @@
 #include <glm/gtc/type_ptr.hpp>
 // include streams and c++ libs here
 #include <iostream>
-#include <maps>
+#include <map>
+#include <vector>
+
+struct Character {
+    //Glyph
+    unsigned int textureID; 
+	glm::ivec2 size; 
+	glm::ivec2 bearing; 
+	unsigned int advance; 
+};
 
 class FontLoader {
 public:
     FontLoader();
     virtual ~FontLoader();
     void addFont(const char *path);
+    std::map<GLchar, Character> getFont(const char* path);
 private:
-
+    std::map<std::string, std::map<GLchar, Character>> fonts;
+    std::vector<const char*> error;
 };
 
 #endif

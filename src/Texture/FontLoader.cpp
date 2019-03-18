@@ -1,7 +1,7 @@
 #include "FontLoader.h"
 
 FontLoader::FontLoader() {
-
+    
 }
 
 void FontLoader::addFont(const char *path) {
@@ -32,7 +32,7 @@ void FontLoader::addFont(const char *path) {
 
     // create temp chars list
 	std::map<GLchar, Character> chars;
-	for (GLubyte c = 0; c < 128; c++){ // Load first 128 characters of ASCII set
+	for (GLubyte c = 0; c < 128; c++) { // Load first 128 characters of ASCII set
 		// Load character glyph 
 		if (FT_Load_Char(face, c, FT_LOAD_RENDER)){
 			std::cout << "ERROR::FREETYTPE: Failed to load Glyph" << std::endl;
@@ -65,7 +65,7 @@ void FontLoader::addFont(const char *path) {
 
     // add new font to list of fonts
 	std::cout << "added new font: " << path << std::endl;
-	fonts.insert(std::pair<std::string, std::map<GLchar, Character>>(location, chars));
+	fonts.insert(std::pair<std::string, std::map<GLchar, Character>>(path, chars));
 
 	// unbind texture
 	glBindTexture(GL_TEXTURE_2D, 0);
@@ -73,4 +73,25 @@ void FontLoader::addFont(const char *path) {
 	// Destroy freetype and face when done
 	FT_Done_Face(face);
 	FT_Done_FreeType(freetype);
+}
+
+std::map<GLchar, Character> FontLoader::getFont(const char *path){
+	auto search = fonts.find(path);
+	if (search != fonts.end()) {
+		return search->second;
+	}else {
+		for (int i = 0; i < error.size(); i++){
+			if (error[i] == path) {
+				return fonts.begin()->second;
+			}
+		}
+		this->addFont(path);
+		auto search = fonts.find(path);
+		if (search != fonts.end()) {
+			return search->second;
+		}else {
+			error.push_back(path);
+			return fonts.begin()->second;
+		}
+	}
 }
