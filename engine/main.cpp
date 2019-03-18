@@ -32,16 +32,6 @@ int main() {
 
     Shader lightShader("../src/Shaders/light.vs", "../src/Shaders/light.fs");
 
-    //temporary
-    vector<string> const faces {
-        "assets/Sprites/Skybox/right.tga",
-		    "assets/Sprites/Skybox/left.tga",
-		    "assets/Sprites/Skybox/top.tga",
-		    "assets/Sprites/Skybox/bottom.tga",
-		    "assets/Sprites/Skybox/front.tga",
-		    "assets/Sprites/Skybox/back.tga"
-    };
-
     Light dir(Directional, lightShader);
 
     renderer.setupSkybox(cubemapShader, skyboxShader);
@@ -75,7 +65,7 @@ int main() {
     	myModel.Draw(dir.lShader);
 
         view = glm::mat4(glm::mat3(camera.GetViewMatrix()));
-        renderer.drawSkybox(projection, view, faces, skyboxShader);
+        renderer.drawSkybox(projection, view, skyboxShader);
 
         glfwSwapBuffers(renderer.window);
         glfwPollEvents();

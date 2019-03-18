@@ -18,7 +18,7 @@ public:
     GLFWwindow* window;
     void processInput(GLFWwindow* window);
     void setupSkybox(Shader cubemapShader, Shader skyboxShader);
-    void drawSkybox(glm::mat4 view, glm::mat4 projection, vector<string> faces, Shader skyboxShader);
+    void drawSkybox(glm::mat4 view, glm::mat4 projection, Shader skyboxShader);
     // cleans up the VBO's, VAO's and the EBO's.
     void cleanUp();
     // view and projection matrices.
@@ -27,6 +27,15 @@ private:
     config con;
     unsigned int VBO, VAO, EBO;
     unsigned int skyboxVAO, skyboxVBO;
+    //All the faces for the skybox
+    vector<string> const faces {
+        "assets/Sprites/Skybox/right.tga",
+		"assets/Sprites/Skybox/left.tga",
+		"assets/Sprites/Skybox/top.tga",
+		"assets/Sprites/Skybox/bottom.tga",
+		"assets/Sprites/Skybox/front.tga",
+		"assets/Sprites/Skybox/back.tga"
+    };
 };
 
 #endif
