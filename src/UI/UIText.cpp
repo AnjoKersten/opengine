@@ -13,6 +13,37 @@ void UIText::setFont(const char *fontP) {
     font = fontP;
 }
 
+void UIText::setColorLerp(glm::vec3 s, glm::vec3 e) {
+	lColors.clear();
+	int lerp = content.length();
+	float r = (s.x - e.x) / lerp;
+	float g = (s.y - e.y) / lerp;
+	float b = (s.z - e.z) / lerp;
+	for (int i = 1; i <= lerp; i++) {
+		glm::vec3 c = glm::vec3(s.x - r * i, s.y - g * i, s.z - b * i);
+		lColors.push_back(c);
+	}
+	lColors.push_back(e);
+}
+
+void UIText::removeColorLerp() {
+	lColors.clear();
+}
+
+bool UIText::doColorLerp() {
+	if (lColors.size() > 0) {
+		return true;
+	}
+	return false;
+}
+
+glm::vec3 UIText::getColorLerp(int i) {
+	if (i < 0 || i >= lColors.size()) {
+		return glm::vec3(0, 1, 0);
+	}
+	return lColors[i];
+}
+
 void UIText::init() {
     // create text quad
 	glGenVertexArrays(1, &_VAO);

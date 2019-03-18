@@ -3,8 +3,9 @@
 
 //include glad
 #include <glad.h>
-//include streams
+//include streams & c++ libs here
 #include <iostream>
+#include <vector>
 // include freetype
 #include <ft2build.h>
 #include FT_FREETYPE_H
@@ -18,6 +19,10 @@ public:
     UIText(const char *fontPath, float _scale);
     virtual ~UIText();
     void setFont(const char *fontP);
+    void setColorLerp(glm::vec3 s, glm::vec3 e);
+    void removeColorLerp();
+    bool doColorLerp();
+    glm::vec3 getColorLerp(int i);
     void init();
     //Properties
     float scale;
@@ -28,6 +33,7 @@ public:
     unsigned int _VAO;
 	unsigned int _VBO; 
 private:
+    std::vector<glm::vec3> lColors;
     const char* font;
 };
 

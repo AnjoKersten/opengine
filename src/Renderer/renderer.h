@@ -10,6 +10,8 @@
 #include "../config.h"
 #include "../Graphics/skybox.h"
 #include "shader.h"
+#include "../UI/UIText.h"
+#include "../UI/UICollection.h"
 
 class Renderer {
 public:
