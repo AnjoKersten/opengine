@@ -97,6 +97,8 @@ add_library(src
 		src/UI/UIText.h
 		src/UI/UICollection.cpp
 		src/UI/UICollection.h
+		src/Texture/FontLoader.cpp
+		src/Texture/FontLoader.h
 )
 
 # Engine
