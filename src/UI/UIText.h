@@ -19,6 +19,7 @@ public:
     UIText(const char *fontPath, float _scale);
     virtual ~UIText();
     void setFont(const char *fontP);
+    const char* getFont() { return font; };
     void setColorLerp(glm::vec3 s, glm::vec3 e);
     void removeColorLerp();
     bool doColorLerp();
