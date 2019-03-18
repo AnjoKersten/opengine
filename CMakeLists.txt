@@ -95,7 +95,8 @@ add_library(src
 		src/Graphics/light.h
 		src/Graphics/light.cpp
 		src/UI/UIText.h
-		src/UI/UIText.cpp
+		src/UI/UICollection.cpp
+		src/UI/UICollection.h
 )
 
 # Engine
