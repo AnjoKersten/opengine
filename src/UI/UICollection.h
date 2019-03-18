@@ -18,6 +18,9 @@ public:
     glm::vec3 pos;
     glm::vec3 size;
 
+    //Center line up
+    glm::vec3 center();
+
 protected:
     void add(UIText* text);
     void remove(UIText* text);

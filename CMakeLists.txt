@@ -90,8 +90,8 @@ add_library(src
 		src/Texture/Texture.cpp
 		src/Texture/Texture.h
 		src/Graphics/skybox.h
-		src/Renderer/Color.h
-		src/Renderer/color.cpp
+		src/Graphics/Color.h
+		src/Graphics/color.cpp
 		src/Graphics/light.h
 		src/Graphics/light.cpp
 		src/UI/UIText.h

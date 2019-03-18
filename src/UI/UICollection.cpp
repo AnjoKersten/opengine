@@ -25,3 +25,7 @@ std::vector<UIText*> UICollection::AllText() {
 int UICollection::TextSize(){
 	return amount.size();
 }
+
+glm::vec3 UICollection::center(){
+	return glm::vec3(0, 0, 0);
+}
