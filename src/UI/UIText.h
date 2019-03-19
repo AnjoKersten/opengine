@@ -3,9 +3,12 @@
 
 //include glad
 #include <glad.h>
+#include <glfw3.h>
 //include streams & c++ libs here
 #include <iostream>
 #include <vector>
+#include <sstream>
+#include <string>
 // include freetype
 #include <ft2build.h>
 #include FT_FREETYPE_H
@@ -30,7 +33,7 @@ public:
     glm::vec3 color;
     std::string content;
     glm::vec3 pos;
-
+    //VAO, VBO
     unsigned int _VAO;
 	unsigned int _VBO; 
 private:

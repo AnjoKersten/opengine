@@ -15,13 +15,15 @@
 #include <iostream>
 #include <map>
 #include <vector>
+#include <string>
+#include <sstream>
 
 struct Character {
     //Glyph
-    unsigned int textureID; 
+    GLuint textureID; 
 	glm::ivec2 size; 
 	glm::ivec2 bearing; 
-	unsigned int advance; 
+	GLuint advance; 
 };
 
 class FontLoader {

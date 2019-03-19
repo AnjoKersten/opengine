@@ -9,6 +9,10 @@ UIText::UIText(const char *fontPath, float _scale) {
     this->init();
 }
 
+UIText::~UIText() {
+	
+}
+
 void UIText::setFont(const char *fontP) {
     font = fontP;
 }

@@ -1,13 +1,18 @@
 #include "FontLoader.h"
 
 FontLoader::FontLoader() {
-    
+    this->addFont("assets/fonts/arial.ttf");
+}
+
+FontLoader::~FontLoader() {
+
 }
 
 void FontLoader::addFont(const char *path) {
-    FT_Library freetype;
+ 	// freetype var
+	FT_Library freetype;
 
-    // init freetype
+	// init freetype
 	if (FT_Init_FreeType(&freetype)){
 		std::cout << "ERROR::FREETYPE: Could not init FreeType Library" << std::endl;
 		return;
@@ -24,15 +29,15 @@ void FontLoader::addFont(const char *path) {
 		std::cout << "FREETYPE: loaded freetype font" << std::endl;
 	}
 
-    // set font size
+	// set font size
 	FT_Set_Pixel_Sizes(face, 0, 48);
 
 	// Disable byte-alignment restriction
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1); 
 
-    // create temp chars list
+	// create temp chars list
 	std::map<GLchar, Character> chars;
-	for (GLubyte c = 0; c < 128; c++) { // Load first 128 characters of ASCII set
+	for (GLubyte c = 0; c < 128; c++){ // Load first 128 characters of ASCII set
 		// Load character glyph 
 		if (FT_Load_Char(face, c, FT_LOAD_RENDER)){
 			std::cout << "ERROR::FREETYTPE: Failed to load Glyph" << std::endl;
@@ -56,14 +61,14 @@ void FontLoader::addFont(const char *path) {
 			texture,
 			glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
 			glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
-			face->glyph->advance.x
+			GLuint(face->glyph->advance.x)
 		};
 
 		// add char to chars list
 		chars.insert(std::pair<GLchar, Character>(c, ch));
 	}
 
-    // add new font to list of fonts
+	// add new font to list of fonts
 	std::cout << "added new font: " << path << std::endl;
 	fonts.insert(std::pair<std::string, std::map<GLchar, Character>>(path, chars));
 
