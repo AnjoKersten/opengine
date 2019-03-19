@@ -80,22 +80,24 @@ void FontLoader::addFont(const char *path) {
 	FT_Done_FreeType(freetype);
 }
 
-std::map<GLchar, Character> FontLoader::getFont(const char *path){
-	auto search = fonts.find(path);
+std::map<GLchar, Character> FontLoader::getFont(const char* location){
+	std::cout << location << std::endl;
+	auto search = fonts.find(location);
 	if (search != fonts.end()) {
 		return search->second;
 	}else {
 		for (int i = 0; i < error.size(); i++){
-			if (error[i] == path) {
+			if (error[i] == location) {
 				return fonts.begin()->second;
 			}
 		}
-		this->addFont(path);
-		auto search = fonts.find(path);
+
+		this->addFont(location);
+		auto search = fonts.find(location);
 		if (search != fonts.end()) {
 			return search->second;
 		}else {
-			error.push_back(path);
+			error.push_back(location);
 			return fonts.begin()->second;
 		}
 	}

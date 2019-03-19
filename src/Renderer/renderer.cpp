@@ -62,7 +62,7 @@ void Renderer::drawSkybox(glm::mat4 view, glm::mat4 projection, Shader skyboxSha
     glDepthFunc(GL_LESS); // set depth function back to default
 }
 
-void Renderer::renderText(UIText* text, UICollection* parent, Shader* shader){
+void Renderer::renderText(UIText* text, UICollection* parent, Shader* shader) {
 	shader->setVec3("textColor", text->color);
 
 	// set texture and VAO
@@ -74,24 +74,30 @@ void Renderer::renderText(UIText* text, UICollection* parent, Shader* shader){
 	std::string str = text->content;
 	float scale = text->scale;
 
-	// get width and height
-	float w = 0;
-	float h = 0;
-	for (c = str.begin(); c != str.end(); c++) {
-		Character ch = fLoader->getFont(text->getFont())[*c];
-		w += ch.size.x * scale;
-		h = (ch.size.y * scale) > h ? ch.size.y * scale : h;
-	}
+	float x = 0;
+	float y = 0;
+	if (text->center) {
+		// get width and height
+		float w = 0;
+		float h = 0;
+		for (c = str.begin(); c != str.end(); c++) {
+			Character ch = fLoader->getFont(text->getFont())[*c];
+			w += ch.size.x * scale;
+			h = (ch.size.y * scale) > h ? ch.size.y * scale : h;
+		}
 
-	// get message scale and position
-	float x = (text->pos.x + parent->pos.x) - w/2;
-	float y = (text->pos.y + parent->pos.y) - h/2; //(text->position.y - SHEIGHT) * -1 + parent->position.x;
-	
-	std::cout << "x:" << x << " y: " << y << std::endl;
+		x = (text->pos.x + parent->pos.x) - w / 2;
+		y = (text->pos.y + parent->pos.y) - h / 2;
+
+		x -= 6; // <-- a small offset
+	}else {
+		x = (text->pos.x + parent->pos.x);
+		y = (text->pos.y + parent->pos.y);
+	}
 
 	// Iterate through all characters
 	int i = 0;
-	for (c = str.begin(); c != str.end(); c++){
+	for (c = str.begin(); c != str.end(); c++) {
 		// if lerp color set new color
 		i++;
 		if (text->doColorLerp()) {
@@ -125,13 +131,11 @@ void Renderer::renderText(UIText* text, UICollection* parent, Shader* shader){
 
 		// Update content of VBO memory
 		glBindBuffer(GL_ARRAY_BUFFER, text->_VBO);
-		glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices); // Be sure to use glBufferSubData and not glBufferData
+		glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
 
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
-		// Render quad
 		glDrawArrays(GL_TRIANGLES, 0, 6);
-		// Now advance cursors for next glyph (note that advance is number of 1/64 pixels)
-		x += (ch.advance >> 6) * scale; // Bitshift by 6 to get value in pixels (2^6 = 64 (divide amount of 1/64th pixels by 64 to get amount of pixels))
+		x += (ch.advance >> 6) * scale;
 	}
 	glBindVertexArray(0);
 	glBindTexture(GL_TEXTURE_2D, 0);

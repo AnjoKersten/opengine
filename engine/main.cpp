@@ -14,6 +14,8 @@ Include classes here
 #include "src/Model/model.h"
 #include "src/Renderer/camera.h"
 #include "src/Graphics/Light.h"
+#include "src/UI/UICollection.h"
+#include "src/UI/UIText.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
@@ -32,9 +34,17 @@ int main() {
 
     Shader lightShader("../src/Shaders/light.vs", "../src/Shaders/light.fs");
 
+    Shader* textShader;
+    textShader = new Shader("../src/shaders/text.vs", "../src/shaders/text.fs");
+	textShader->use();
+
     Light dir(Directional, lightShader);
 
     renderer.setupSkybox(cubemapShader, skyboxShader);
+    UICollection* col;
+
+    UIText* text = new UIText("assets/fonts/arial.ttf", 0.25, glm::vec3(1, 1, 0));
+    text->pos.y = con.yRes - 15;
 
     glfwSetFramebufferSizeCallback(renderer.window, framebuffer_size_callback);
 
@@ -43,13 +53,20 @@ int main() {
         renderer.processInput(renderer.window);
         camera.processInput(renderer.window);
 
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // also clear the depth buffer now!
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // also clear the depth buffer now
+        glm::mat4 projection;
+        glm::mat4 view;
 
         dir.SetDirectionalLight(camera);
 
+        projection = glm::ortho(0.0f, static_cast<GLfloat>(con.xRes), 0.0f, static_cast<GLfloat>(con.yRes));
+        textShader->setMat4("projection", projection);
+
+        //renderer.renderText(text, col, textShader);
+
         modelShader.use();
-        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), con.xRes / con.yRes, 0.1f, 100.0f);
-        glm::mat4 view = camera.GetViewMatrix();
+        projection = glm::perspective(glm::radians(camera.Zoom), con.xRes / con.yRes, 0.1f, 100.0f);
+        view = camera.GetViewMatrix();
 		modelShader.setMat4("projection", projection);
 		modelShader.setMat4("view", view);
 

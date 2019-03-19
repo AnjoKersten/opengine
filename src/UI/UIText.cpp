@@ -1,16 +1,21 @@
 #include "UIText.h"
 
-UIText::UIText(const char *fontPath, float _scale) {
+UIText::UIText(const char *fontPath, float _scale, glm::vec3 _color) {
     this->setFont(fontPath);
     this->scale = _scale;
+	this->color = _color;
     
-    this->content = "No content";
+    this->content = "NULL";
+
+	this->center = true;
+
+	this->lColors = std::vector<glm::vec3>();
 
     this->init();
 }
 
 UIText::~UIText() {
-	
+
 }
 
 void UIText::setFont(const char *fontP) {

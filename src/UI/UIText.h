@@ -19,7 +19,7 @@
 
 class UIText {
 public:
-    UIText(const char *fontPath, float _scale);
+    UIText(const char *fontPath, float _scale, glm::vec3 _color);
     virtual ~UIText();
     void setFont(const char *fontP);
     const char* getFont() { return font; };
@@ -33,6 +33,8 @@ public:
     glm::vec3 color;
     std::string content;
     glm::vec3 pos;
+    //Check if center
+    bool center; ///< @brief should UIText be centerd
     //VAO, VBO
     unsigned int _VAO;
 	unsigned int _VBO; 
