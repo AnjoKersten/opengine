@@ -143,13 +143,16 @@ void Renderer::renderText(UIText* text, UICollection* parent, Shader* shader) {
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-// void Renderer::renderOBJ(Model mod, glm::mat4 proj, glm::mat4 view, Shader modShader) {
-// 	glm::mat4 model;
-//     model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f)); // Translate it down a bit so it's at the center of the scene
-// 	model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// It's a bit too big for our scene, so scale it down
-// 	glUniformMatrix4fv(glGetUniformLocation(modShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(model));
-// 	mod.Draw(modShader);
-// }
+void Renderer::renderOBJ(Model mod, glm::mat4 proj, glm::mat4 view, Shader modShader) {
+	modShader.use();
+	modShader.setMat4("projection", proj);
+	modShader.setMat4("view", view);
+	glm::mat4 model;
+    model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f)); // Translate it down a bit so it's at the center of the scene
+	model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// It's a bit too big for our scene, so scale it down
+	glUniformMatrix4fv(glGetUniformLocation(modShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(model));
+	mod.Draw(modShader);
+}
 
 /**
  Input to close the window.

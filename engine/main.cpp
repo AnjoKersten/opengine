@@ -42,22 +42,11 @@ int main() {
         camera.processInput(renderer.window);
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // also clear the depth buffer now
-        camera.projection;
-        camera.view;
-
-        modelShader.use();
+        
         camera.projection = glm::perspective(glm::radians(camera.Zoom), con.xRes / con.yRes, 0.1f, 100.0f);
         camera.view = camera.GetViewMatrix();
-		modelShader.setMat4("projection", camera.projection);
-		modelShader.setMat4("view", camera.view);
 
-        // Draw the loaded model
-    	glm::mat4 model;
-    	model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f)); // Translate it down a bit so it's at the center of the scene
-    	model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// It's a bit too big for our scene, so scale it down
-    	glUniformMatrix4fv(glGetUniformLocation(modelShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(model));
-
-    	myModel.Draw(modelShader);
+        renderer.renderOBJ(myModel, camera.projection, camera.view, modelShader);
 
         camera.view = glm::mat4(glm::mat3(camera.GetViewMatrix()));
         renderer.drawSkybox(camera.projection, camera.view, skyboxShader);

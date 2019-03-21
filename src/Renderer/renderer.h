@@ -13,7 +13,7 @@
 #include "../UI/UIText.h"
 #include "../UI/UICollection.h"
 #include "../Texture/FontLoader.h"
-// /#include "../Model/model.h"
+#include "../Model/model.h"
 
 class Renderer {
 public:
@@ -24,7 +24,7 @@ public:
     void setupSkybox(Shader cubemapShader, Shader skyboxShader);
     void drawSkybox(glm::mat4 view, glm::mat4 projection, Shader skyboxShader);
     void renderText(UIText* text, UICollection* parent, Shader* shader);
-    //void renderOBJ(Model mod, glm::mat4 proj, glm::mat4 view, Shader modShader);
+    void renderOBJ(Model mod, glm::mat4 proj, glm::mat4 view, Shader modShader);
     // cleans up the VBO's, VAO's and the EBO's.
     void cleanUp();
     // view and projection matrices.
