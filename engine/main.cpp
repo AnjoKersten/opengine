@@ -32,19 +32,7 @@ int main() {
     Shader skyboxShader("../src/Shaders/skybox.vs", "../src/Shaders/skybox.fs");
     Shader cubemapShader("../src/Shaders/cubemap.vs", "../src/Shaders/cubemap.fs");
 
-    Shader lightShader("../src/Shaders/light.vs", "../src/Shaders/light.fs");
-
-    Shader* textShader;
-    textShader = new Shader("../src/shaders/text.vs", "../src/shaders/text.fs");
-	textShader->use();
-
-    Light dir(Directional, lightShader);
-
     renderer.setupSkybox(cubemapShader, skyboxShader);
-    UICollection* col;
-
-    UIText* text = new UIText("assets/fonts/arial.ttf", 0.25, glm::vec3(1, 1, 0));
-    text->pos.y = con.yRes - 15;
 
     glfwSetFramebufferSizeCallback(renderer.window, framebuffer_size_callback);
 
@@ -54,24 +42,14 @@ int main() {
         camera.processInput(renderer.window);
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // also clear the depth buffer now
-        glm::mat4 projection;
-        glm::mat4 view;
-
-        dir.SetDirectionalLight(camera);
-
-        projection = glm::ortho(0.0f, static_cast<GLfloat>(con.xRes), 0.0f, static_cast<GLfloat>(con.yRes));
-        textShader->setMat4("projection", projection);
-
-        //renderer.renderText(text, col, textShader);
+        camera.projection;
+        camera.view;
 
         modelShader.use();
-        projection = glm::perspective(glm::radians(camera.Zoom), con.xRes / con.yRes, 0.1f, 100.0f);
-        view = camera.GetViewMatrix();
-		modelShader.setMat4("projection", projection);
-		modelShader.setMat4("view", view);
-
-        dir.lShader.setMat4("projection", projection);
-		dir.lShader.setMat4("view", view);
+        camera.projection = glm::perspective(glm::radians(camera.Zoom), con.xRes / con.yRes, 0.1f, 100.0f);
+        camera.view = camera.GetViewMatrix();
+		modelShader.setMat4("projection", camera.projection);
+		modelShader.setMat4("view", camera.view);
 
         // Draw the loaded model
     	glm::mat4 model;
@@ -79,10 +57,10 @@ int main() {
     	model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// It's a bit too big for our scene, so scale it down
     	glUniformMatrix4fv(glGetUniformLocation(modelShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(model));
 
-    	myModel.Draw(dir.lShader);
+    	myModel.Draw(modelShader);
 
-        view = glm::mat4(glm::mat3(camera.GetViewMatrix()));
-        renderer.drawSkybox(projection, view, skyboxShader);
+        camera.view = glm::mat4(glm::mat3(camera.GetViewMatrix()));
+        renderer.drawSkybox(camera.projection, camera.view, skyboxShader);
 
         glfwSwapBuffers(renderer.window);
         glfwPollEvents();
