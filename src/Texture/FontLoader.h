@@ -34,7 +34,7 @@ public:
     std::map<GLchar, Character> getFont(const char* path);
 private:
     std::map<std::string, std::map<GLchar, Character>> fonts;
-    std::vector<const char*> error;
+    std::vector<const char*> unknown;
 };
 
 #endif

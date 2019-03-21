@@ -70,14 +70,14 @@ int main() {
 		modelShader.setMat4("projection", projection);
 		modelShader.setMat4("view", view);
 
+        dir.lShader.setMat4("projection", projection);
+		dir.lShader.setMat4("view", view);
+
         // Draw the loaded model
     	glm::mat4 model;
     	model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f)); // Translate it down a bit so it's at the center of the scene
     	model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// It's a bit too big for our scene, so scale it down
     	glUniformMatrix4fv(glGetUniformLocation(modelShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(model));
-
-        dir.lShader.setMat4("projection", projection);
-		dir.lShader.setMat4("view", view);
 
     	myModel.Draw(dir.lShader);
 

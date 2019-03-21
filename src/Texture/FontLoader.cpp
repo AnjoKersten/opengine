@@ -1,7 +1,7 @@
 #include "FontLoader.h"
 
 FontLoader::FontLoader() {
-    this->addFont("assets/fonts/arial.ttf");
+
 }
 
 FontLoader::~FontLoader() {
@@ -11,6 +11,8 @@ FontLoader::~FontLoader() {
 void FontLoader::addFont(const char *path) {
  	// freetype var
 	FT_Library freetype;
+
+	std::cout << path << std::endl;
 
 	// init freetype
 	if (FT_Init_FreeType(&freetype)){
@@ -63,14 +65,18 @@ void FontLoader::addFont(const char *path) {
 			glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
 			GLuint(face->glyph->advance.x)
 		};
-
 		// add char to chars list
 		chars.insert(std::pair<GLchar, Character>(c, ch));
 	}
 
+	
 	// add new font to list of fonts
 	std::cout << "added new font: " << path << std::endl;
-	fonts.insert(std::pair<std::string, std::map<GLchar, Character>>(path, chars));
+	std::cout << fonts.max_size() << std::endl;
+	// Size of map =    13799029261476036608
+	// maxsize of map = 230584300921369395
+	std::cout << fonts.size() << std::endl;
+	//fonts.insert(std::pair<std::string, std::map<GLchar, Character>>(path, chars)); //segmentation fault 11 here
 
 	// unbind texture
 	glBindTexture(GL_TEXTURE_2D, 0);
@@ -78,26 +84,27 @@ void FontLoader::addFont(const char *path) {
 	// Destroy freetype and face when done
 	FT_Done_Face(face);
 	FT_Done_FreeType(freetype);
+
+	std::cout << "complete loading" << path << std::endl;
 }
 
 std::map<GLchar, Character> FontLoader::getFont(const char* location){
 	std::cout << location << std::endl;
-	auto search = fonts.find(location);
+	auto search = fonts.find(location); // <- Segmentation fault 11 here
 	if (search != fonts.end()) {
 		return search->second;
-	}else {
-		for (int i = 0; i < error.size(); i++){
-			if (error[i] == location) {
+	} else {
+		for (int i = 0; i < unknown.size(); i++){
+			if (unknown[i] == location) {
 				return fonts.begin()->second;
 			}
 		}
-
 		this->addFont(location);
 		auto search = fonts.find(location);
 		if (search != fonts.end()) {
 			return search->second;
-		}else {
-			error.push_back(location);
+		} else {
+			unknown.push_back(location);
 			return fonts.begin()->second;
 		}
 	}

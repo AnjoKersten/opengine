@@ -12,13 +12,15 @@ Light::~Light() {
 }
 
 void Light::SetDiffuseMap(const char *texPath) {
-    Texture diffMap(texPath);
+    Texture diffMap;
+	diffMap.loadTexture(texPath);
 	glActiveTexture(GL_TEXTURE0);
 	lShader.setInt("material.diffuse", 0);
 }
 
 void Light::SetSpecularMap(const char *texPath) {
-    Texture specMap(texPath);
+    Texture specMap;
+	specMap.loadTexture(texPath);
 	glActiveTexture(GL_TEXTURE1);
 	lShader.setInt("material.specular", 1);
 }
