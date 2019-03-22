@@ -13,13 +13,10 @@ Include classes here
 #include "src/Renderer/shader.h"
 #include "src/Model/model.h"
 #include "src/Renderer/camera.h"
-#include "src/Graphics/Light.h"
-#include "src/UI/UICollection.h"
-#include "src/UI/UIText.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
-Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+Camera camera(glm::vec3(0.0f, -1.5f, 2.5f));
 
 int main() {
     Renderer renderer;
@@ -32,7 +29,7 @@ int main() {
     Shader skyboxShader("../src/Shaders/skybox.vs", "../src/Shaders/skybox.fs");
     Shader cubemapShader("../src/Shaders/cubemap.vs", "../src/Shaders/cubemap.fs");
 
-    renderer.setupSkybox(cubemapShader, skyboxShader);
+    renderer.init(cubemapShader, skyboxShader);
 
     glfwSetFramebufferSizeCallback(renderer.window, framebuffer_size_callback);
 
@@ -42,7 +39,7 @@ int main() {
         camera.processInput(renderer.window);
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // also clear the depth buffer now
-        
+
         camera.projection = glm::perspective(glm::radians(camera.Zoom), con.xRes / con.yRes, 0.1f, 100.0f);
         camera.view = camera.GetViewMatrix();
 

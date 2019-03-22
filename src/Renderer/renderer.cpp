@@ -31,7 +31,7 @@ Renderer::~Renderer() {
 
 }
 
-void Renderer::setupSkybox(Shader cubemapShader, Shader skyboxShader) {
+void Renderer::init(Shader cubemapShader, Shader skyboxShader) {
     //Skybox VAO
     glGenVertexArrays(1, &skyboxVAO);
     glGenBuffers(1, &skyboxVBO);
