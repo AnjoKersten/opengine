@@ -13,7 +13,7 @@ public:
     static bool getKey();
     static bool getKeyDown();
 private:
-    static Input* instance;
+        static Input* instance;
 };
 
 #endif
