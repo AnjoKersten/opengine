@@ -78,8 +78,8 @@ add_definitions(
 
 # src (libcommon.a)
 add_library(src
-    src/Renderer/renderer.h
-    src/Renderer/renderer.cpp
+    		src/Renderer/renderer.h
+    		src/Renderer/renderer.cpp
 		src/Renderer/shader.h
 		src/Renderer/camera.h
 		src/Maths/glm.h
@@ -101,6 +101,8 @@ add_library(src
 		src/UI/UICollection.h
 		src/Texture/FontLoader.cpp
 		src/Texture/FontLoader.h
+		src/Core/input.h
+		src/Core/input.cpp
 )
 
 # Engine

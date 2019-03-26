@@ -22,12 +22,27 @@ void Input::init(GLFWwindow* window) {
 	Input::getInstance()->window = window;
 
 	//required callbacks
-	glfwSetKeyCallback(window, _handleKey);
-	glfwSetMouseButtonCallback(window, _handleMouseButton);
-	glfwSetCursorPosCallback(window, _handleMouse);
-	glfwSetScrollCallback(window, _handleScroll);
+	glfwSetKeyCallback(window, keyHandler);
 }
 
 void Input::update() {
 	glfwPollEvents();
+}
+
+bool Input::getKey(int kCode) {
+	return Input::getInstance()->_keys[kCode];
+}
+
+bool Input::getKeyDown(int kCode) {
+	if (Input::getInstance()->_keys[kCode] && !Input::getInstance()->_keysDown[kCode]) {
+		Input::getInstance()->_keysDown[kCode] = true;
+		return true;
+	} else if (!Input::getInstance()->_keys[kCode] && Input::getInstance()->_keysDown[kCode]) {
+		Input::getInstance()->_keysDown[kCode] = false;
+	}
+	return false;
+}
+
+void Input::keyHandler(GLFWwindow* window, int key, int scanCode, int action, int mode) {
+		
 }
