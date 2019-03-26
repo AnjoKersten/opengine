@@ -105,6 +105,7 @@ add_library(src
 		src/Core/input.cpp
 		src/Renderer/actor.h
 		src/Renderer/actor.cpp
+		src/Maths/transform.h
 )
 
 # Engine
