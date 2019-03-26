@@ -44,5 +44,11 @@ bool Input::getKeyDown(int kCode) {
 }
 
 void Input::keyHandler(GLFWwindow* window, int key, int scanCode, int action, int mode) {
-		
+	if (key >= 0 && key <= GLFW_KEY_LAST) {
+		if (action == GLFW_PRESS) {
+			Input::getInstance()->_keys[key] = true;
+		} else if (action == GLFW_RELEASE) {
+			Input::getInstance()->_keys[key] = false;
+		}
+	}	
 }
