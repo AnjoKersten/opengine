@@ -14,6 +14,7 @@
 #include "../UI/UICollection.h"
 #include "../Texture/FontLoader.h"
 #include "../Model/model.h"
+#include "../Core/input.h"
 
 class Renderer {
 public:
@@ -31,6 +32,7 @@ public:
 private:
     Skybox box;
     config con;
+    Input input;
     unsigned int VBO, VAO, EBO;
     unsigned int skyboxVAO, skyboxVBO;
     vector<string> const faces {

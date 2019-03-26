@@ -103,6 +103,8 @@ add_library(src
 		src/Texture/FontLoader.h
 		src/Core/input.h
 		src/Core/input.cpp
+		src/Renderer/actor.h
+		src/Renderer/actor.cpp
 )
 
 # Engine

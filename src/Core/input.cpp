@@ -3,7 +3,10 @@
 Input* Input::instance = NULL;
 
 Input::Input() {
-
+	for (int i = 0; i < GLFW_KEY_LAST; i++) {
+		_keys[i] = false;
+		_keysDown[i] = false;
+	}
 }
 
 Input::~Input() {

@@ -160,7 +160,7 @@ void Renderer::renderOBJ(Model mod, glm::mat4 proj, glm::mat4 view, Shader modSh
  The function expects a window.
  */
 void Renderer::processInput(GLFWwindow *window) {
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+    if (input.getKeyDown(GLFW_KEY_SPACE)) {
         glfwSetWindowShouldClose(window, true);
     }
 }
