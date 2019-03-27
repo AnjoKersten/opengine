@@ -2,6 +2,7 @@
 #define ACTOR_H
 
 #include <vector>
+#include "src/Maths/transform.h"
 
 class Actor {
 public:
@@ -13,6 +14,7 @@ public:
 	int getActorCount() { return actors.size(); };
 private:
 	std::vector<Actor*> actors;
+
 };
 
 #endif
