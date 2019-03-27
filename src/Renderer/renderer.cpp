@@ -25,13 +25,18 @@ Renderer::Renderer() {
     }
     glEnable(GL_DEPTH_TEST);
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+
+    Shader* skyboxShader = new Shader("../src/Shaders/skybox.vs", "../src/Shaders/skybox.fs");
+    Shader* cubemapShader = new Shader("../src/Shaders/cubemap.vs", "../src/Shaders/cubemap.fs");
+
+    this->init(cubemapShader, skyboxShader);
 }
 
 Renderer::~Renderer() {
 
 }
 
-void Renderer::init(Shader cubemapShader, Shader skyboxShader) {
+void Renderer::init(Shader* cubemapShader, Shader* skyboxShader) {
     //Skybox VAO
     glGenVertexArrays(1, &skyboxVAO);
     glGenBuffers(1, &skyboxVBO);
@@ -41,10 +46,10 @@ void Renderer::init(Shader cubemapShader, Shader skyboxShader) {
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     //Shader config
-    cubemapShader.use();
-    cubemapShader.setInt("texture1", 0);
-    skyboxShader.use();
-    skyboxShader.setInt("skybox", 0);
+    cubemapShader->use();
+    cubemapShader->setInt("texture1", 0);
+    skyboxShader->use();
+    skyboxShader->setInt("skybox", 0);
 }
 
 void Renderer::drawSkybox(glm::mat4 view, glm::mat4 projection, Shader skyboxShader) {

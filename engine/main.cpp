@@ -29,9 +29,6 @@ int main() {
     Shader skyboxShader("../src/Shaders/skybox.vs", "../src/Shaders/skybox.fs");
     Shader cubemapShader("../src/Shaders/cubemap.vs", "../src/Shaders/cubemap.fs");
 
-    //skybox init
-    renderer.init(cubemapShader, skyboxShader);
-
     glfwSetFramebufferSizeCallback(renderer.window, framebuffer_size_callback);
 
     // render loop
