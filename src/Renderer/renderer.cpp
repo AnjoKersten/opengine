@@ -5,38 +5,18 @@ Constructor
 Window creation
 */
 Renderer::Renderer() {
-    glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-#ifdef __APPLE__
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // uncomment this statement to fix compilation on OS X
-#endif
-
-    window = glfwCreateWindow(con.xRes, con.yRes, "OPENGINE", NULL, NULL);
-    if (window == NULL) {
-        std::cout << "Failed to create GLFW window" << std::endl;
-        glfwTerminate();
-    }
-    glfwMakeContextCurrent(window);
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-        std::cout << "Failed to initialize GLAD" << std::endl;
-    }
-    glEnable(GL_DEPTH_TEST);
-    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
     Shader* skyboxShader = new Shader("../src/Shaders/skybox.vs", "../src/Shaders/skybox.fs");
     Shader* cubemapShader = new Shader("../src/Shaders/cubemap.vs", "../src/Shaders/cubemap.fs");
 
-    this->init(cubemapShader, skyboxShader);
+    this->skyboxInit(cubemapShader, skyboxShader);
 }
 
 Renderer::~Renderer() {
 
 }
 
-void Renderer::init(Shader* cubemapShader, Shader* skyboxShader) {
+void Renderer::skyboxInit(Shader* cubemapShader, Shader* skyboxShader) {
     //Skybox VAO
     glGenVertexArrays(1, &skyboxVAO);
     glGenBuffers(1, &skyboxVBO);
@@ -153,7 +133,7 @@ void Renderer::renderOBJ(Model mod, glm::mat4 proj, glm::mat4 view, Shader modSh
 	modShader.setMat4("projection", proj);
 	modShader.setMat4("view", view);
 	glm::mat4 model;
-    model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f)); // Translate it down a bit so it's at the center of the scene
+        model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f)); // Translate it down a bit so it's at the center of the scene
 	model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// It's a bit too big for our scene, so scale it down
 	glUniformMatrix4fv(glGetUniformLocation(modShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(model));
 	mod.Draw(modShader);

@@ -1,8 +1,6 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
-#include <glad.h>
-#include <glfw3.h>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -15,14 +13,12 @@
 #include "../Texture/FontLoader.h"
 #include "../Model/model.h"
 #include "../Core/input.h"
-
 class Renderer {
 public:
     Renderer();
     virtual ~Renderer();
-    GLFWwindow* window;
     void processInput(GLFWwindow* window);
-    void init(Shader* cubemapShader, Shader* skyboxShader);
+    void skyboxInit(Shader* cubemapShader, Shader* skyboxShader);
     void drawSkybox(glm::mat4 view, glm::mat4 projection, Shader skyboxShader);
     void renderText(UIText* text, UICollection* parent, Shader* shader);
     void renderOBJ(Model mod, glm::mat4 proj, glm::mat4 view, Shader modShader);
@@ -37,11 +33,11 @@ private:
     unsigned int skyboxVAO, skyboxVBO;
     vector<string> const faces {
         "assets/Sprites/Skybox/right.tga",
-		"assets/Sprites/Skybox/left.tga",
-		"assets/Sprites/Skybox/top.tga",
-		"assets/Sprites/Skybox/bottom.tga",
-		"assets/Sprites/Skybox/front.tga",
-		"assets/Sprites/Skybox/back.tga"
+	"assets/Sprites/Skybox/left.tga",
+	"assets/Sprites/Skybox/top.tga",
+	"assets/Sprites/Skybox/bottom.tga",
+	"assets/Sprites/Skybox/front.tga",
+	"assets/Sprites/Skybox/back.tga"
     };
 };
 
