@@ -17,6 +17,7 @@
 #include "../Core/input.h"
 #include "actor.h"
 #include "camera.h"
+#include "scene.h"
 
 class Renderer {
 public:
@@ -25,6 +26,7 @@ public:
     void processInput(GLFWwindow* window);
     void skyboxInit(Shader* cubemapShader, Shader* skyboxShader);
     void drawSkybox(glm::mat4 view, glm::mat4 projection, Shader skyboxShader);
+    void renderScene(Scene* scene, GLFWwindow* window);
     void renderActor(glm::mat4 view, glm::mat4 projection, glm::mat4 modelMatrix, Actor* actor, Camera* camera);
     void renderText(UIText* text, UICollection* parent, Shader* shader);
     void renderOBJ(Model* mod, glm::mat4 proj, glm::mat4 view);
@@ -35,6 +37,8 @@ private:
     Skybox box;
     config con;
     Input input;
+    glm::mat4 _viewMatrix;
+    glm::mat4 _projectionMatrix;
     unsigned int VBO, VAO, EBO;
     unsigned int skyboxVAO, skyboxVBO;
     Shader* modShader;

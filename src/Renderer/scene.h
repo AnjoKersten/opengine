@@ -2,8 +2,9 @@
 #define SCENE_H
 
 #include "camera.h"
+#include "actor.h"
 
-class Scene {
+class Scene : public Actor {
 public:
 	Scene();
 	virtual ~Scene();
@@ -12,10 +13,10 @@ public:
 	void stop() { isRunning = false; };
 
 	Camera* camera() { return pCamera; };
-private:
-	bool isRunning;
-	Camera* pCamera;
 
+	bool isRunning;
+private:
+	Camera* pCamera;
 };
 
 #endif

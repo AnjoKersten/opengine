@@ -115,6 +115,8 @@ add_library(src
 # Engine
 add_executable(engine
 	engine/main.cpp
+	engine/game.h
+	engine/game.cpp
 )
 target_link_libraries(engine
 	src

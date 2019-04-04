@@ -30,4 +30,12 @@ void Core::createWindow() {
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 }
 
+void Core::run(Scene* scene) {
+	renderer.processInput(window);
+	scene->camera()->processInput(window);
+
+	renderer.renderScene(scene, window);
+	if (glfwWindowShouldClose(window)) { scene->stop(); }
+}
+
 

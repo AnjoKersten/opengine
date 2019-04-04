@@ -6,10 +6,10 @@ Window creation
 */
 Renderer::Renderer() {
 
-    Shader* skyboxShader = new Shader("../src/Shaders/skybox.vs", "../src/Shaders/skybox.fs");
-    Shader* cubemapShader = new Shader("../src/Shaders/cubemap.vs", "../src/Shaders/cubemap.fs");
+    //Shader* skyboxShader = new Shader("../src/Shaders/skybox.vs", "../src/Shaders/skybox.fs");
+    //Shader* cubemapShader = new Shader("../src/Shaders/cubemap.vs", "../src/Shaders/cubemap.fs");
 
-    this->skyboxInit(cubemapShader, skyboxShader);
+    //this->skyboxInit(cubemapShader, skyboxShader);
 }
 
 Renderer::~Renderer() {
@@ -45,6 +45,23 @@ void Renderer::drawSkybox(glm::mat4 view, glm::mat4 projection, Shader skyboxSha
     glDrawArrays(GL_TRIANGLES, 0, 36);
     glBindVertexArray(0);
     glDepthFunc(GL_LESS); // set depth function back to default
+}
+
+void Renderer::renderScene(Scene* scene, GLFWwindow* window) {
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	_viewMatrix = scene->camera()->GetViewMatrix();
+
+	_projectionMatrix = glm::perspective(45.0f, con.xRes / con.yRes, 0.1f, 10000.0f);
+
+	glm::mat4 modelMatrix = glm::mat4(1.0f);
+
+	this->renderActor(_viewMatrix, _projectionMatrix, modelMatrix, scene, scene->camera());
+
+	//renderSkybox();
+
+	glfwPollEvents();
+	glfwSwapBuffers(window);
 }
 
 void Renderer::renderActor(glm::mat4 view, glm::mat4 projection, glm::mat4 modelMatrix, Actor* actor, Camera* camera) {

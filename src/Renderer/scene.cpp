@@ -1,6 +1,6 @@
 #include "scene.h"
 
-Scene::Scene() {
+Scene::Scene() : Actor() {
 	pCamera = new Camera(glm::vec3(0.0f, -1.5f, 2.5f));
 
 	isRunning = true;
