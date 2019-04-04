@@ -7,7 +7,6 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 int main() {
 	
     Core core;
-    Renderer renderer;
 
     Game* game = new Game();
 
@@ -17,7 +16,8 @@ int main() {
     while (game->isRunning) {
 	core.run(game);
     }
-    renderer.cleanUp();
+
+    core.cleanUp();
     glfwTerminate();
     return 0;
 }

@@ -16,6 +16,7 @@ public:
 	GLFWwindow* window;
 	void createWindow();
 	void run(Scene* scene);
+	void cleanUp();
 private:
 	config con;
 	Renderer renderer;

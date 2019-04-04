@@ -38,4 +38,6 @@ void Core::run(Scene* scene) {
 	if (glfwWindowShouldClose(window)) { scene->stop(); }
 }
 
-
+void Core::cleanUp() {
+	renderer.cleanUp();
+}

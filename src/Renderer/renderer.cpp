@@ -6,10 +6,10 @@ Window creation
 */
 Renderer::Renderer() {
 
-    //Shader* skyboxShader = new Shader("../src/Shaders/skybox.vs", "../src/Shaders/skybox.fs");
-    //Shader* cubemapShader = new Shader("../src/Shaders/cubemap.vs", "../src/Shaders/cubemap.fs");
+    Shader* skyboxShader = new Shader("../src/Shaders/skybox.vs", "../src/Shaders/skybox.fs");
+    Shader* cubemapShader = new Shader("../src/Shaders/cubemap.vs", "../src/Shaders/cubemap.fs");
 
-    //this->skyboxInit(cubemapShader, skyboxShader);
+    this->skyboxInit(cubemapShader, skyboxShader);
 }
 
 Renderer::~Renderer() {
