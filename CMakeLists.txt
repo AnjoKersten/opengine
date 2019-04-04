@@ -108,6 +108,8 @@ add_library(src
 		src/Maths/transform.h
 		src/Core/core.h
 		src/Core/core.cpp
+		src/Renderer/scene.h
+		src/Renderer/scene.cpp
 )
 
 # Engine

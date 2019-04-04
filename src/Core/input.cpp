@@ -15,7 +15,7 @@ Input::~Input() {
 
 Input* Input::getInstance() {
 	if (instance == NULL) {
-		std::cout << "Instance made!" << std::endl;
+		std::cout << "Input instance made!" << std::endl;
 		instance = new Input();
 	}
 	return instance;
