@@ -25,7 +25,7 @@ int main() {
     Renderer renderer;
 
     Shader modelShader("../src/Shaders/model.vs", "../src/Shaders/model.fs");
-    Model myModel("assets/Models/Bear/bear.obj");
+    Model* myModel = new Model("assets/Models/Bear/bear.obj");
 
     Shader skyboxShader("../src/Shaders/skybox.vs", "../src/Shaders/skybox.fs");
 
@@ -41,7 +41,7 @@ int main() {
         camera->projection = glm::perspective(glm::radians(camera->Zoom), con.xRes / con.yRes, 0.1f, 100.0f);
         camera->view = camera->GetViewMatrix();
 
-        renderer.renderOBJ(myModel, camera->projection, camera->view, modelShader);
+        renderer.renderOBJ(myModel, camera->projection, camera->view);
 
         camera->view = glm::mat4(glm::mat3(camera->GetViewMatrix()));
         renderer.drawSkybox(camera->projection, camera->view, skyboxShader);

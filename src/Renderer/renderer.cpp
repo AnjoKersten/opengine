@@ -47,6 +47,31 @@ void Renderer::drawSkybox(glm::mat4 view, glm::mat4 projection, Shader skyboxSha
     glDepthFunc(GL_LESS); // set depth function back to default
 }
 
+void Renderer::renderActor(glm::mat4 view, glm::mat4 projection, glm::mat4 modelMatrix, Actor* actor, Camera* camera) {
+	glm::vec3 pos = glm::vec3(actor->position.x, actor->position.y, actor->position.z);
+	glm::vec3 rot = glm::vec3(actor->rotation.x, actor->rotation.y, actor->rotation.z);
+	glm::vec3 scale = glm::vec3(actor->scale.x, actor->scale.y, actor->scale.z);
+
+	glm::mat4 transformMatrix = glm::translate(glm::mat4(1.0f), pos);
+	glm::mat4 rotationMatrix = glm::eulerAngleYXZ(rot.y, rot.x, rot.z);
+	glm::mat4 scaleMatrix = glm::scale(glm::mat4(1.0f), scale);
+
+	glm::mat4 mm = transformMatrix * rotationMatrix * scaleMatrix;
+
+	modelMatrix *= mm;
+
+	Model* model = actor->model;
+	if (model != NULL) {
+		this->renderOBJ(model, view, projection);
+	}
+	
+	vector<Actor*> children = actor->actors;
+	vector<Actor*>::iterator child;
+	for (child = children.begin(); child != children.end(); child++) {
+		this->renderActor(view, projection, modelMatrix, *child, camera);
+	}
+}
+
 void Renderer::renderText(UIText* text, UICollection* parent, Shader* shader) {
 	FontLoader* fLoader;
 	fLoader->addFont("assets/fonts/arial.ttf");
@@ -128,15 +153,16 @@ void Renderer::renderText(UIText* text, UICollection* parent, Shader* shader) {
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-void Renderer::renderOBJ(Model mod, glm::mat4 proj, glm::mat4 view, Shader modShader) {
-	modShader.use();
-	modShader.setMat4("projection", proj);
-	modShader.setMat4("view", view);
+void Renderer::renderOBJ(Model* mod, glm::mat4 proj, glm::mat4 view) {
+	modShader = new Shader("../src/Shaders/model.vs", "../src/Shaders/model.fs");
+	modShader->use();
+	modShader->setMat4("projection", proj);
+	modShader->setMat4("view", view);
 	glm::mat4 model;
         model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f)); // Translate it down a bit so it's at the center of the scene
 	model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));	// It's a bit too big for our scene, so scale it down
-	glUniformMatrix4fv(glGetUniformLocation(modShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(model));
-	mod.Draw(modShader);
+	glUniformMatrix4fv(glGetUniformLocation(modShader->ID, "model"), 1, GL_FALSE, glm::value_ptr(model));
+	mod->Draw(modShader);
 }
 
 /**

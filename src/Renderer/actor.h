@@ -2,26 +2,27 @@
 #define ACTOR_H
 
 #include <vector>
-#include "src/Maths/transform.h"
 #include "src/Core/input.h" 
 #include "src/Model/model.h"
 
 class Actor {
 public:
+	Actor* parent;
 	bool active;
+	Model* model = NULL;
+	glm::vec3 position;
+	glm::vec3 scale;
+	glm::vec3 rotation;
 	Actor();
 	virtual ~Actor();
 	Input* input() { return _input; }
 	void childActor(Actor* actor) { actors.push_back(actor); };
 	void removeChildActor(Actor* actor);
-	std::vector<Actor*> getActors() { return actors; };
+	std::vector<Actor*> actors;
 	int getActorCount() { return actors.size(); };
 	void addModel(GLchar* path);
 private:
-	std::vector<Actor*> actors;
 	Input* _input;
-	Transform transform;
-	Model
 };
 
 #endif
