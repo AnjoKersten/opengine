@@ -21,4 +21,6 @@ void Actor::removeChildActor(Actor* actor) {
 	}
 }
 
-
+void Actor::addModel(GLchar* path) {
+	model = new Model(path);
+}
