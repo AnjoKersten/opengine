@@ -2,6 +2,7 @@
 
 Core::Core() {
 	this->createWindow();
+	renderer = new Renderer();
 }
 
 Core::~Core() {
@@ -31,13 +32,14 @@ void Core::createWindow() {
 }
 
 void Core::run(Scene* scene) {
-	renderer.processInput(window);
+	renderer->processInput(window);
 	scene->camera()->processInput(window);
 
-	renderer.renderScene(scene, window);
+	renderer->renderScene(scene, window);
+
 	if (glfwWindowShouldClose(window)) { scene->stop(); }
 }
 
 void Core::cleanUp() {
-	renderer.cleanUp();
+	renderer->cleanUp();
 }

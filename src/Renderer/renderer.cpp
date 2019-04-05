@@ -10,6 +10,8 @@ Renderer::Renderer() {
     Shader* cubemapShader = new Shader("../src/Shaders/cubemap.vs", "../src/Shaders/cubemap.fs");
 
     this->skyboxInit(cubemapShader, skyboxShader);
+
+    std::cout << "Constructor is being called!" << std::endl;
 }
 
 Renderer::~Renderer() {
@@ -32,13 +34,13 @@ void Renderer::skyboxInit(Shader* cubemapShader, Shader* skyboxShader) {
     skyboxShader->setInt("skybox", 0);
 }
 
-void Renderer::drawSkybox(glm::mat4 view, glm::mat4 projection, Shader skyboxShader) {
-    //Shader skyboxShader("../Shaders/skyboxVertex.vs", "../Shaders/skyboxFrag.fs");
+void Renderer::drawSkybox(glm::mat4 view, glm::mat4 projection) {
+    skyboxShader = new Shader("../src/Shaders/skybox.vs", "../src/Shaders/skybox.fs");
     unsigned int cubemapTexture = box.loadSkybox(faces); 
     glDepthFunc(GL_LEQUAL);
-    skyboxShader.use();
-    skyboxShader.setMat4("view", view);
-    skyboxShader.setMat4("projection", projection);
+    skyboxShader->use();
+    skyboxShader->setMat4("view", view);
+    skyboxShader->setMat4("projection", projection);
     glBindVertexArray(skyboxVAO);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
@@ -52,16 +54,17 @@ void Renderer::renderScene(Scene* scene, GLFWwindow* window) {
 
 	_viewMatrix = scene->camera()->GetViewMatrix();
 
-	_projectionMatrix = glm::perspective(45.0f, con.xRes / con.yRes, 0.1f, 10000.0f);
+	_projectionMatrix = glm::perspective(glm::radians(scene->camera()->Zoom), con.xRes / con.yRes, 0.1f, 100.0f);
 
 	glm::mat4 modelMatrix = glm::mat4(1.0f);
 
 	this->renderActor(_viewMatrix, _projectionMatrix, modelMatrix, scene, scene->camera());
+	
+	_viewMatrix = glm::mat4(glm::mat3(scene->camera()->GetViewMatrix()));
+	drawSkybox(_viewMatrix, _projectionMatrix);
 
-	//renderSkybox();
-
-	glfwPollEvents();
 	glfwSwapBuffers(window);
+	glfwPollEvents();
 }
 
 void Renderer::renderActor(glm::mat4 view, glm::mat4 projection, glm::mat4 modelMatrix, Actor* actor, Camera* camera) {

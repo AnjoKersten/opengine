@@ -19,7 +19,7 @@ public:
 	void cleanUp();
 private:
 	config con;
-	Renderer renderer;
+	Renderer* renderer;
 
 };
 

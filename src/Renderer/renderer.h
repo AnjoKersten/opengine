@@ -25,7 +25,7 @@ public:
     virtual ~Renderer();
     void processInput(GLFWwindow* window);
     void skyboxInit(Shader* cubemapShader, Shader* skyboxShader);
-    void drawSkybox(glm::mat4 view, glm::mat4 projection, Shader skyboxShader);
+    void drawSkybox(glm::mat4 view, glm::mat4 projection);
     void renderScene(Scene* scene, GLFWwindow* window);
     void renderActor(glm::mat4 view, glm::mat4 projection, glm::mat4 modelMatrix, Actor* actor, Camera* camera);
     void renderText(UIText* text, UICollection* parent, Shader* shader);
@@ -42,6 +42,7 @@ private:
     unsigned int VBO, VAO, EBO;
     unsigned int skyboxVAO, skyboxVBO;
     Shader* modShader;
+    Shader* skyboxShader;
     vector<string> const faces {
         "assets/Sprites/Skybox/right.tga",
 	"assets/Sprites/Skybox/left.tga",
