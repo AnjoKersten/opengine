@@ -37,6 +37,7 @@ private:
     Skybox box;
     config con;
     Input input;
+    FontLoader* fLoader;
     glm::mat4 _viewMatrix;
     glm::mat4 _projectionMatrix;
     unsigned int VBO, VAO, EBO;

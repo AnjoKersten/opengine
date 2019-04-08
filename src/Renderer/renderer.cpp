@@ -6,6 +6,8 @@ Window creation
 */
 Renderer::Renderer() {
 
+    fLoader = new FontLoader();
+
     Shader* skyboxShader = new Shader("../src/Shaders/skybox.vs", "../src/Shaders/skybox.fs");
     Shader* cubemapShader = new Shader("../src/Shaders/cubemap.vs", "../src/Shaders/cubemap.fs");
 
@@ -93,7 +95,6 @@ void Renderer::renderActor(glm::mat4 view, glm::mat4 projection, glm::mat4 model
 }
 
 void Renderer::renderText(UIText* text, UICollection* parent, Shader* shader) {
-	FontLoader* fLoader;
 	fLoader->addFont("assets/fonts/arial.ttf");
 	shader->setVec3("textColor", text->color);
 

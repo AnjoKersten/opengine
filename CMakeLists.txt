@@ -110,6 +110,8 @@ add_library(src
 		src/Core/core.cpp
 		src/Renderer/scene.h
 		src/Renderer/scene.cpp
+		src/Core/scenemanager.h
+		src/Core/scenemanager.cpp
 )
 
 # Engine
