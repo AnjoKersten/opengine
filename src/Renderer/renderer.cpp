@@ -13,7 +13,7 @@ Renderer::Renderer() {
 
     this->skyboxInit(cubemapShader, skyboxShader);
 
-    std::cout << "Constructor is being called!" << std::endl;
+    std::cout << "Renderer is being called!" << std::endl;
 }
 
 Renderer::~Renderer() {
@@ -51,7 +51,7 @@ void Renderer::drawSkybox(glm::mat4 view, glm::mat4 projection) {
     glDepthFunc(GL_LESS); // set depth function back to default
 }
 
-void Renderer::renderScene(Scene* scene, GLFWwindow* window) {
+void Renderer::renderScene(Scene* scene) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	_viewMatrix = scene->camera()->GetViewMatrix();
@@ -65,7 +65,6 @@ void Renderer::renderScene(Scene* scene, GLFWwindow* window) {
 	_viewMatrix = glm::mat4(glm::mat3(scene->camera()->GetViewMatrix()));
 	drawSkybox(_viewMatrix, _projectionMatrix);
 
-	glfwSwapBuffers(window);
 	glfwPollEvents();
 }
 

@@ -29,13 +29,14 @@ void Core::createWindow() {
     }
     glEnable(GL_DEPTH_TEST);
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+    glfwSwapBuffers(window);
 }
 
 void Core::run(Scene* scene) {
 	renderer->processInput(window);
 	scene->camera()->processInput(window);
 
-	renderer->renderScene(scene, window);
+	renderer->renderScene(scene);
 
 	if (glfwWindowShouldClose(window)) { scene->stop(); }
 }
