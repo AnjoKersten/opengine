@@ -112,6 +112,8 @@ add_library(src
 		src/Renderer/scene.cpp
 		src/Core/scenemanager.h
 		src/Core/scenemanager.cpp
+		src/Renderer/resourcemanager.h
+		src/Renderer/resourcemanager.cpp
 )
 
 # Engine
